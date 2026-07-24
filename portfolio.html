@@ -214,6 +214,69 @@
     .cta-banner{margin:50px 20px 0;flex-direction:column;text-align:center;}
     .footer-grid{grid-template-columns:1fr 1fr;}
   }
+
+  /* ---------- Project Gallery Modal ---------- */
+  .gallery-overlay{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(6,10,24,0.92);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .gallery-overlay.open{display:flex;}
+  .gallery-modal{
+    position:relative;
+    width:100%;
+    max-width:420px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .gallery-title{
+    color:#fff;font-size:16px;font-weight:700;margin-bottom:14px;text-align:center;
+  }
+  .gallery-frame{
+    position:relative;
+    width:100%;
+    background:#0d1530;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .gallery-frame img{
+    width:100%;
+    display:block;
+    max-height:78vh;
+    object-fit:contain;
+    background:#0d1530;
+  }
+  .gallery-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    border:none;color:#fff;font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:.2s;
+  }
+  .gallery-nav:hover{background:rgba(255,255,255,0.25);}
+  .gallery-prev{left:10px;}
+  .gallery-next{right:10px;}
+  .gallery-close{
+    position:absolute;top:-18px;right:-18px;
+    width:38px;height:38px;border-radius:50%;
+    background:var(--blue);color:#fff;border:3px solid #0a1a3c;
+    font-size:16px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .gallery-counter{
+    color:#c3cbe0;font-size:13px;margin-top:14px;letter-spacing:1px;
+  }
+  @media(max-width:480px){
+    .gallery-modal{max-width:100%;}
+    .gallery-close{top:-14px;right:0;}
+  }
 </style>
 </head>
 <body>
@@ -264,7 +327,7 @@
         <span class="project-tag">Mobile App</span>
         <h3>TriNest Savings App</h3>
         <p>A savings tracking app for three members to record deposits and manage their group savings efficiently.</p>
-        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#" class="view-project" onclick="openGallery(event,'trinest')">View Project <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
     <div class="project-card">
@@ -405,6 +468,74 @@
     <div class="brand-mini">We <span>Code</span> Your Vision</div>
   </div>
 </footer>
+
+<div class="gallery-overlay" id="galleryOverlay" onclick="if(event.target===this) closeGallery()">
+  <div class="gallery-modal">
+    <button class="gallery-close" onclick="closeGallery()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="gallery-title" id="galleryTitle"></div>
+    <div class="gallery-frame">
+      <img id="galleryImg" src="" alt="Project screenshot">
+      <button class="gallery-nav gallery-prev" onclick="galleryStep(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="gallery-nav gallery-next" onclick="galleryStep(1)"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+    <div class="gallery-counter" id="galleryCounter"></div>
+  </div>
+</div>
+
+<script>
+  const projectGalleries = {
+    trinest: {
+      title: "TriNest Savings App",
+      images: [
+        "images/trinest-1-dashboard.png",
+        "images/trinest-2-history.png",
+        "images/trinest-3-deposit.png",
+        "images/trinest-4-members.png",
+        "images/trinest-5-profile.png"
+      ]
+    }
+  };
+
+  let currentGallery = null;
+  let currentIndex = 0;
+
+  function openGallery(e, key){
+    e.preventDefault();
+    const g = projectGalleries[key];
+    if(!g) return;
+    currentGallery = g;
+    currentIndex = 0;
+    renderGallery();
+    document.getElementById('galleryOverlay').classList.add('open');
+  }
+
+  function closeGallery(){
+    document.getElementById('galleryOverlay').classList.remove('open');
+    currentGallery = null;
+  }
+
+  function galleryStep(dir){
+    if(!currentGallery) return;
+    const len = currentGallery.images.length;
+    currentIndex = (currentIndex + dir + len) % len;
+    renderGallery();
+  }
+
+  function renderGallery(){
+    if(!currentGallery) return;
+    document.getElementById('galleryTitle').textContent = currentGallery.title;
+    document.getElementById('galleryImg').src = currentGallery.images[currentIndex];
+    document.getElementById('galleryCounter').textContent =
+      (currentIndex+1) + " / " + currentGallery.images.length;
+  }
+
+  document.addEventListener('keydown', function(e){
+    if(!currentGallery) return;
+    if(e.key === 'Escape') closeGallery();
+    if(e.key === 'ArrowRight') galleryStep(1);
+    if(e.key === 'ArrowLeft') galleryStep(-1);
+  });
+</script>
 
 </body>
 </html>
