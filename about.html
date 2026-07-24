@@ -44,12 +44,30 @@
   .logo-text .brand{font-size:20px;font-weight:800;letter-spacing:1px;color:var(--navy);}
   .logo-text .brand span{color:var(--blue-bright);}
   .logo-text .tagline{font-size:9px;letter-spacing:2px;color:var(--gray-text);font-weight:600;}
-  nav ul{display:flex;gap:32px;align-items:center;}
-  nav a{
-    font-size:15px;font-weight:500;color:#2a3242;
-    padding-bottom:4px;border-bottom:2px solid transparent;transition:.2s;
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .hamburger{
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;
+    width:42px;height:42px;background:transparent;border:2px solid var(--navy);
+    border-radius:6px;cursor:pointer;padding:0;flex-shrink:0;
   }
-  nav a.active, nav a:hover{color:var(--blue);border-bottom-color:var(--blue);}
+  .hamburger span{display:block;width:20px;height:2px;background:var(--navy);transition:.25s;border-radius:2px;}
+  .hamburger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  nav{
+    position:absolute;top:100%;left:0;right:0;background:var(--white);
+    box-shadow:0 14px 26px rgba(0,0,0,0.12);max-height:0;overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  nav.open{max-height:520px;}
+  nav ul{display:flex;flex-direction:column;padding:6px 48px 18px;gap:0;}
+  nav ul li{border-bottom:1px solid #eef0f4;}
+  nav ul li:last-child{border-bottom:none;}
+  nav a{
+    display:block;font-size:15px;font-weight:500;color:#2a3242;
+    padding:14px 0;transition:.2s;
+  }
+  nav a.active, nav a:hover{color:var(--blue);}
   .btn{
     display:inline-flex;align-items:center;gap:6px;
     padding:11px 22px;border-radius:6px;font-weight:600;font-size:14.5px;
@@ -211,7 +229,7 @@
 
   @media(max-width:980px){
     header{padding:14px 20px;}
-    nav ul{display:none;}
+    nav ul{padding:6px 20px 18px;}
     .about-hero{padding:50px 24px;}
     .mv-section,.why-section{grid-template-columns:1fr;padding:50px 24px;}
     .values-grid{grid-template-columns:repeat(2,1fr);}
@@ -231,7 +249,13 @@
       <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
     </div>
   </div>
-  <nav>
+    <div class="header-actions">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="pricing.html" class="btn btn-primary">Get a Quote &rsaquo;</a>
+  </div>
+  <nav id="mainNav">
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About Us</a></li>
@@ -242,7 +266,6 @@
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
-  <a href="pricing.html" class="btn btn-primary">Get a Quote &rsaquo;</a>
 </header>
 
 <section class="about-hero">
@@ -395,6 +418,29 @@
     <div class="brand-mini">We <span>Code</span> Your Vision</div>
   </div>
 </footer>
+
+<script>
+  (function(){
+    var nav = document.getElementById('mainNav');
+    var btn = document.getElementById('hamburgerBtn');
+    function closeNav(){
+      nav.classList.remove('open');
+      btn.classList.remove('active');
+    }
+    btn.addEventListener('click', function(){
+      nav.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+    nav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', closeNav);
+    });
+    document.addEventListener('click', function(e){
+      if(nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)){
+        closeNav();
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
