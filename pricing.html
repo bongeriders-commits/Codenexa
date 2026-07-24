@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 48px;
+    background:var(--white);
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:46px;width:auto;}
+  .logo-text{line-height:1.1;}
+  .logo-text .brand{font-size:20px;font-weight:800;letter-spacing:1px;color:var(--navy);}
+  .logo-text .brand span{color:var(--blue-bright);}
+  .logo-text .tagline{font-size:9px;letter-spacing:2px;color:var(--gray-text);font-weight:600;}
+  nav ul{display:flex;gap:32px;align-items:center;}
+  nav a{
+    font-size:15px;font-weight:500;color:#2a3242;
+    padding-bottom:4px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav a.active, nav a:hover{color:var(--blue);border-bottom-color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:11px 22px;border-radius:6px;font-weight:600;font-size:14.5px;
+    cursor:pointer;transition:.2s;border:2px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-light{background:#fff;color:var(--blue);}
+  .btn-light:hover{filter:brightness(0.97);}
+  .btn-outline-navy{background:transparent;border:2px solid var(--navy);color:var(--navy);}
+  .btn-outline-navy:hover{background:var(--navy);color:#fff;}
+  .btn-outline-white{background:transparent;border:2px solid #fff;color:#fff;}
+  .btn-outline-white:hover{background:#fff;color:var(--blue);}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{filter:brightness(1.05);}
+  .btn-block{width:100%;justify-content:center;}
+
+  /* ---------- Hero (same design as other pages) ---------- */
+  .hero{
+    position:relative;
+    color:#fff;
+    padding:26px 48px 90px;
+    background-image:
+      linear-gradient(100deg, rgba(5,11,26,0.94) 0%, rgba(8,18,40,0.88) 40%, rgba(8,18,40,0.55) 75%, rgba(8,18,40,0.35) 100%),
+      url('images/about-office.png');
+    background-size:cover;
+    background-position:center;
+  }
+  .breadcrumb{
+    position:relative;z-index:2;
+    display:flex;align-items:center;gap:8px;
+    font-size:13.5px;color:#aab4cf;margin-bottom:28px;
+  }
+  .breadcrumb a{color:#aab4cf;}
+  .breadcrumb .current{color:var(--blue-bright);}
+  .hero-inner{position:relative;z-index:2;max-width:620px;}
+  .hero-eyebrow{color:var(--blue-bright);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:14px;}
+  .hero h1{font-size:42px;font-weight:800;margin-bottom:8px;}
+  .hero h1 span{color:var(--blue-bright);}
+  .hero-rule{width:60px;height:3px;background:var(--blue-bright);margin:16px 0 20px;}
+  .hero p{font-size:15.5px;color:#c3cbe0;max-width:480px;margin-bottom:22px;}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px 30px;}
+  .hero-tags li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#dfe4f2;}
+  .hero-tags li i{color:var(--blue-bright);font-size:16px;}
+
+  /* ---------- Pricing toggle ---------- */
+  .pricing-toggle-wrap{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    margin:-46px 48px 46px;position:relative;z-index:3;
+  }
+  .toggle-pill{
+    display:flex;background:#eef1f6;border-radius:8px;padding:4px;
+    box-shadow:0 10px 30px rgba(20,40,90,0.12);
+  }
+  .toggle-pill button{
+    border:none;background:transparent;padding:10px 22px;border-radius:6px;
+    font-size:14px;font-weight:600;color:var(--gray-text);cursor:pointer;transition:.2s;
+  }
+  .toggle-pill button.active{background:var(--blue);color:#fff;}
+  .save-note{font-size:13.5px;color:var(--blue);font-weight:600;}
+
+  /* ---------- Pricing cards ---------- */
+  .pricing-section{padding:0 48px 30px;}
+  .pricing-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    align-items:stretch;
+  }
+  .price-card{
+    position:relative;
+    background:#fff;
+    border:1px solid #e6e9ef;
+    border-radius:12px;
+    padding:34px 26px;
+    text-align:center;
+    box-shadow:0 6px 18px rgba(20,40,90,0.06);
+    display:flex;flex-direction:column;
+    transition:.2s;
+  }
+  .price-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(20,40,90,0.12);}
+  .price-card.featured{
+    background:linear-gradient(180deg,var(--navy),var(--navy-deep));
+    color:#fff;
+    border:none;
+    transform:scale(1.04);
+    box-shadow:0 20px 40px rgba(10,26,60,0.28);
+  }
+  .price-card.featured:hover{transform:scale(1.04) translateY(-4px);}
+  .badge-popular{
+    position:absolute;top:0;left:50%;transform:translate(-50%,-50%);
+    background:var(--blue-bright);color:#fff;font-size:11.5px;font-weight:700;
+    letter-spacing:1px;padding:6px 16px;border-radius:20px;white-space:nowrap;
+  }
+  .price-card h3{font-size:19px;font-weight:800;color:var(--navy);letter-spacing:.5px;margin-bottom:8px;}
+  .price-card.featured h3{color:#fff;}
+  .price-card .plan-desc{font-size:13.5px;color:var(--gray-text);margin-bottom:22px;min-height:36px;}
+  .price-card.featured .plan-desc{color:#c3cbe0;}
+  .price-icon{
+    width:76px;height:76px;border-radius:50%;
+    background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;margin:0 auto 22px;
+  }
+  .price-card.featured .price-icon{background:rgba(255,255,255,0.12);color:#fff;}
+  .price-tier{font-size:15px;font-weight:700;color:var(--blue);letter-spacing:1px;margin-bottom:24px;}
+  .price-card.featured .price-tier{color:var(--blue-bright);}
+  .price-tier.custom{color:var(--navy);}
+  .price-card.featured .price-tier.custom{color:#fff;}
+  .price-features{text-align:left;margin-bottom:26px;flex:1;}
+  .price-features li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:13.5px;color:#39435a;padding:7px 0;
+  }
+  .price-card.featured .price-features li{color:#dfe4f2;}
+  .price-features li i{color:var(--blue);font-size:12.5px;margin-top:3px;}
+  .price-card.featured .price-features li i{color:var(--blue-bright);}
+
+  /* ---------- Included strip ---------- */
+  .included-section{padding:60px 48px 10px;text-align:center;}
+  .included-title{
+    color:var(--gray-text);font-weight:700;font-size:12.5px;letter-spacing:2px;
+    display:flex;align-items:center;gap:16px;margin-bottom:40px;
+  }
+  .included-title::before,.included-title::after{content:"";flex:1;height:1px;background:#e0e4ec;}
+  .included-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;}
+  .included-item{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .included-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+  }
+  .included-item span{font-size:13px;color:var(--navy);font-weight:600;}
+
+  /* ---------- Addons + Process ---------- */
+  .split-section{
+    padding:56px 48px 70px;
+    display:grid;grid-template-columns:1fr 1.3fr;gap:26px;
+  }
+  .addons-card{
+    background:var(--light-bg);border-radius:12px;padding:30px;
+  }
+  .addons-card h4{color:var(--blue);font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:20px;}
+  .addon-row{
+    display:flex;align-items:center;gap:14px;padding:12px 0;
+    border-bottom:1px solid #e3e7ee;
+  }
+  .addon-row:last-of-type{border-bottom:none;}
+  .addon-icon{
+    width:38px;height:38px;border-radius:8px;background:#fff;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:15px;flex:none;
+    box-shadow:0 3px 8px rgba(20,40,90,0.08);
+  }
+  .addon-row .addon-name{font-size:13.5px;color:#2a3242;font-weight:500;}
+  .addon-note{font-size:13.5px;color:var(--blue);font-weight:600;display:inline-flex;align-items:center;gap:6px;margin-top:18px;}
+
+  .process-card{
+    background:#fff;border:1px solid #e6e9ef;border-radius:12px;padding:30px;
+    box-shadow:0 6px 18px rgba(20,40,90,0.06);
+  }
+  .process-card h4{color:var(--blue);font-size:14px;font-weight:700;letter-spacing:1px;margin-bottom:26px;}
+  .process-track{display:flex;justify-content:space-between;gap:0;}
+  .process-step{display:flex;flex-direction:column;align-items:center;text-align:center;width:100px;position:relative;}
+  .process-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;margin-bottom:10px;position:relative;z-index:2;
+  }
+  .process-num{
+    position:absolute;top:-4px;right:6px;
+    background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;
+    width:18px;height:18px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;z-index:3;
+  }
+  .process-step h5{font-size:12.5px;color:var(--navy);margin-bottom:4px;}
+  .process-step p{font-size:11px;color:var(--gray-text);}
+  .process-connector{
+    flex:1;height:2px;margin-top:28px;
+    background:repeating-linear-gradient(90deg,#c7cfe0 0,#c7cfe0 5px,transparent 5px,transparent 10px);
+  }
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    background:linear-gradient(90deg,var(--navy-deep),var(--navy));
+    color:#fff;
+    margin:0 48px 60px;
+    border-radius:14px;
+    padding:36px 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .cta-left{display:flex;align-items:center;gap:20px;}
+  .cta-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:#fff;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;
+  }
+  .cta-left h3{font-size:19px;margin-bottom:4px;}
+  .cta-left p{font-size:13.5px;color:#c3cbe0;}
+  .cta-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#aeb6cc;padding:50px 48px 20px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col h4{color:#fff;font-size:14px;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-col ul li{margin-bottom:10px;font-size:13.5px;}
+  .footer-col ul li a:hover{color:var(--blue-bright);}
+  .footer-col ul li a.active{color:var(--blue-bright);}
+  .footer-col .contact-line{display:flex;gap:10px;margin-bottom:12px;font-size:13.5px;}
+  .socials{display:flex;gap:10px;margin-top:16px;}
+  .socials a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+  }
+  .footer-bottom{
+    display:flex;justify-content:space-between;
+    padding-top:20px;font-size:12.5px;
+  }
+  .footer-bottom .brand-mini span{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{display:none;}
+    .hero{padding:20px 24px 60px;}
+    .pricing-toggle-wrap{margin:-40px 20px 40px;}
+    .pricing-section{padding:0 20px 20px;}
+    .pricing-grid{grid-template-columns:repeat(2,1fr);}
+    .price-card.featured{transform:none;}
+    .included-section{padding:44px 20px 10px;}
+    .included-grid{grid-template-columns:repeat(3,1fr);gap:26px 14px;}
+    .split-section{padding:44px 20px 50px;grid-template-columns:1fr;}
+    .process-track{flex-wrap:wrap;justify-content:center;gap:20px;}
+    .process-connector{display:none;}
+    .process-step{width:80px;}
+    .cta-banner{margin:0 20px 50px;flex-direction:column;text-align:center;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html#why-us">Why Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="index.html#contact" class="btn btn-primary">Contact Us &rsaquo;</a>
+</header>
+
+<section class="hero">
+  <div class="breadcrumb">
+    <i class="fa-solid fa-house"></i>
+    <a href="index.html">Home</a> / <span class="current">Pricing</span>
+  </div>
+  <div class="hero-inner">
+    <h1>Our Simple &amp; Transparent <span>Pricing</span></h1>
+    <div class="hero-rule"></div>
+    <p>We believe in quality solutions at fair prices. Choose the plan that fits your needs or request a custom quote for your business.</p>
+    <ul class="hero-tags">
+      <li><i class="fa-solid fa-shield-halved"></i> No Hidden Charges</li>
+      <li><i class="fa-solid fa-headset"></i> 24/7 Support</li>
+    </ul>
+  </div>
+</section>
+
+<div class="pricing-toggle-wrap">
+  <div class="toggle-pill">
+    <button class="active" type="button">Monthly</button>
+    <button type="button">One-Time</button>
+  </div>
+  <span class="save-note"><i class="fa-solid fa-arrow-turn-up" style="transform:scaleX(-1);"></i> Save with a custom package</span>
+</div>
+
+<section class="pricing-section">
+  <div class="pricing-grid">
+
+    <div class="price-card">
+      <h3>BASIC</h3>
+      <p class="plan-desc">Perfect for startups and small businesses</p>
+      <div class="price-icon"><i class="fa-solid fa-rocket"></i></div>
+      <div class="price-tier custom">Get a Quote</div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-circle-check"></i> 5 Pages Website</li>
+        <li><i class="fa-solid fa-circle-check"></i> Responsive Design</li>
+        <li><i class="fa-solid fa-circle-check"></i> Contact Form</li>
+        <li><i class="fa-solid fa-circle-check"></i> Basic SEO</li>
+        <li><i class="fa-solid fa-circle-check"></i> 1 Month Support</li>
+      </ul>
+      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Get Started</a>
+    </div>
+
+    <div class="price-card">
+      <h3>STANDARD</h3>
+      <p class="plan-desc">Great for growing businesses</p>
+      <div class="price-icon"><i class="fa-solid fa-code"></i></div>
+      <div class="price-tier custom">Get a Quote</div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-circle-check"></i> Up to 10 Pages</li>
+        <li><i class="fa-solid fa-circle-check"></i> Responsive Design</li>
+        <li><i class="fa-solid fa-circle-check"></i> CMS Integration</li>
+        <li><i class="fa-solid fa-circle-check"></i> Basic SEO</li>
+        <li><i class="fa-solid fa-circle-check"></i> Social Media Integration</li>
+        <li><i class="fa-solid fa-circle-check"></i> 3 Months Support</li>
+      </ul>
+      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Get Started</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="badge-popular">MOST POPULAR</div>
+      <h3>PREMIUM</h3>
+      <p class="plan-desc">Ideal for established businesses</p>
+      <div class="price-icon"><i class="fa-solid fa-crown"></i></div>
+      <div class="price-tier">Get a Quote</div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-circle-check"></i> Unlimited Pages</li>
+        <li><i class="fa-solid fa-circle-check"></i> Responsive Design</li>
+        <li><i class="fa-solid fa-circle-check"></i> CMS Integration</li>
+        <li><i class="fa-solid fa-circle-check"></i> Advanced SEO</li>
+        <li><i class="fa-solid fa-circle-check"></i> Social Media Integration</li>
+        <li><i class="fa-solid fa-circle-check"></i> Contact Form</li>
+        <li><i class="fa-solid fa-circle-check"></i> 6 Months Support</li>
+        <li><i class="fa-solid fa-circle-check"></i> Priority Support</li>
+      </ul>
+      <a href="index.html#contact" class="btn btn-light btn-block">Get Started</a>
+    </div>
+
+    <div class="price-card">
+      <h3>ENTERPRISE</h3>
+      <p class="plan-desc">Custom solutions for large organizations</p>
+      <div class="price-icon"><i class="fa-solid fa-building"></i></div>
+      <div class="price-tier custom">Custom Pricing</div>
+      <ul class="price-features">
+        <li><i class="fa-solid fa-circle-check"></i> Custom Requirements</li>
+        <li><i class="fa-solid fa-circle-check"></i> Advanced Features</li>
+        <li><i class="fa-solid fa-circle-check"></i> Scalable Solutions</li>
+        <li><i class="fa-solid fa-circle-check"></i> Dedicated Developer</li>
+        <li><i class="fa-solid fa-circle-check"></i> Priority Support</li>
+        <li><i class="fa-solid fa-circle-check"></i> Maintenance &amp; Training</li>
+      </ul>
+      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Contact Us</a>
+    </div>
+
+  </div>
+</section>
+
+<section class="included-section">
+  <div class="included-title">WHAT'S INCLUDED IN ALL PLANS</div>
+  <div class="included-grid">
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-display"></i></div>
+      <span>Modern &amp; Responsive Design</span>
+    </div>
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-globe"></i></div>
+      <span>Cross Browser Compatibility</span>
+    </div>
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-gauge-high"></i></div>
+      <span>Fast Loading Speed</span>
+    </div>
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <span>Secure &amp; Clean Code</span>
+    </div>
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-user-check"></i></div>
+      <span>User Friendly Interface</span>
+    </div>
+    <div class="included-item">
+      <div class="included-icon"><i class="fa-solid fa-headset"></i></div>
+      <span>Ongoing Support &amp; Guidance</span>
+    </div>
+  </div>
+</section>
+
+<section class="split-section">
+  <div class="addons-card">
+    <h4>POPULAR ADD-ONS</h4>
+    <div class="addon-row">
+      <div class="addon-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+      <div class="addon-name">E-Commerce Functionality</div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+      <div class="addon-name">Mobile App (Android)</div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-icon"><i class="fa-solid fa-cash-register"></i></div>
+      <div class="addon-name">POS System</div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-icon"><i class="fa-solid fa-globe"></i></div>
+      <div class="addon-name">Domain &amp; Hosting (1 Year)</div>
+    </div>
+    <div class="addon-row">
+      <div class="addon-icon"><i class="fa-solid fa-pen-nib"></i></div>
+      <div class="addon-name">Content Writing</div>
+    </div>
+    <a href="index.html#contact" class="addon-note">Request a Custom Quote <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+
+  <div class="process-card">
+    <h4>OUR DEVELOPMENT PROCESS</h4>
+    <div class="process-track">
+      <div class="process-step">
+        <div class="process-icon"><i class="fa-solid fa-comments"></i><span class="process-num">1</span></div>
+        <h5>Consultation</h5>
+        <p>We understand your needs and goals.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <div class="process-icon"><i class="fa-solid fa-clipboard-list"></i><span class="process-num">2</span></div>
+        <h5>Planning</h5>
+        <p>We plan the best solution for you.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <div class="process-icon"><i class="fa-solid fa-code"></i><span class="process-num">3</span></div>
+        <h5>Development</h5>
+        <p>We build your solution with care.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <div class="process-icon"><i class="fa-solid fa-circle-check"></i><span class="process-num">4</span></div>
+        <h5>Testing</h5>
+        <p>We test thoroughly to ensure quality.</p>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step">
+        <div class="process-icon"><i class="fa-solid fa-rocket"></i><span class="process-num">5</span></div>
+        <h5>Deployment</h5>
+        <p>We deliver and support your growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-left">
+    <div class="cta-icon"><i class="fa-solid fa-rocket"></i></div>
+    <div>
+      <h3>Have a Custom Project?</h3>
+      <p>Let's discuss your ideas and get a solution built specifically for your business.</p>
+    </div>
+  </div>
+  <div class="cta-actions">
+    <a href="index.html#contact" class="btn btn-light">Get a Free Quote &rsaquo;</a>
+    <a href="https://wa.me/254700000000" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-wrap" style="margin-bottom:14px;">
+        <img src="images/logo.png" alt="CodeNexa Solutions logo" style="height:38px;">
+        <div class="logo-text">
+          <div class="brand" style="color:#fff;font-size:16px;">CODE<span>NEXA</span></div>
+          <div class="tagline">SOLUTIONS</div>
+        </div>
+      </div>
+      <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="about.html#why-us">Why Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>OUR SERVICES</h4>
+      <ul>
+        <li>Web Development</li>
+        <li>Mobile Apps</li>
+        <li>POS Systems</li>
+        <li>Desktop Software</li>
+        <li>Cloud Solutions</li>
+        <li>UI/UX Design</li>
+        <li>Maintenance &amp; Support</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexa.co.ke</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> www.codenexa.co.ke</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 CodeNexa Solutions. All rights reserved.</div>
+    <div class="brand-mini">We <span>Code</span> Your Vision</div>
+  </div>
+</footer>
+
+<script>
+  const toggleBtns = document.querySelectorAll('.toggle-pill button');
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
