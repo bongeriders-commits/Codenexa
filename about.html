@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Us | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
   :root{
     --navy:#0a1a3c;
@@ -61,19 +62,20 @@
 
   /* ---------- About hero ---------- */
   .about-hero{
-    background:radial-gradient(ellipse at 75% 30%, #10275a 0%, var(--navy-deep) 55%, #050b1a 100%);
+    position:relative;
     color:#fff;
-    padding:70px 48px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
+    padding:90px 48px 90px;
+    background-image:
+      linear-gradient(100deg, rgba(5,11,26,0.94) 0%, rgba(8,18,40,0.88) 40%, rgba(8,18,40,0.55) 75%, rgba(8,18,40,0.35) 100%),
+      url('images/about-office.png');
+    background-size:cover;
+    background-position:center;
   }
+  .about-hero-copy{position:relative;z-index:2;max-width:620px;}
   .about-hero .eyebrow{color:var(--blue-bright);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:16px;}
   .about-hero h1{font-size:40px;font-weight:800;line-height:1.2;margin-bottom:20px;}
   .about-hero h1 span{color:var(--blue-bright);}
   .about-hero p{font-size:15.5px;color:#c3cbe0;max-width:520px;}
-  .about-hero-img{border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
 
   /* ---------- Mission / Vision ---------- */
   .mv-section{
@@ -205,7 +207,8 @@
   @media(max-width:980px){
     header{padding:14px 20px;}
     nav ul{display:none;}
-    .about-hero,.mv-section,.why-section{grid-template-columns:1fr;padding:50px 24px;}
+    .about-hero{padding:50px 24px;}
+    .mv-section,.why-section{grid-template-columns:1fr;padding:50px 24px;}
     .values-grid{grid-template-columns:repeat(2,1fr);}
     .quote-block{grid-template-columns:1fr;}
     .quote-block img{height:220px;}
@@ -238,25 +241,22 @@
 </header>
 
 <section class="about-hero">
-  <div>
+  <div class="about-hero-copy">
     <div class="eyebrow">ABOUT US</div>
     <h1>About CODENEXA <span>Solutions</span></h1>
     <p>At CodeNexa Solutions, we turn ideas into powerful digital solutions. We are a team of passionate developers, designers and problem solvers committed to delivering innovative, reliable and user-friendly software that helps businesses grow and achieve their goals.</p>
-  </div>
-  <div class="about-hero-img">
-    <img src="images/about-office.png" alt="CodeNexa Solutions office">
   </div>
 </section>
 
 <section class="mv-section">
   <div class="mv-card">
-    <div class="mv-icon">&#127919;</div>
+    <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
     <div class="label">OUR MISSION</div>
     <h3>Empowering Businesses Through Technology</h3>
     <p>To design and develop reliable, scalable and innovative software solutions that enable businesses and organizations to achieve their goals through technology.</p>
   </div>
   <div class="mv-card">
-    <div class="mv-icon">&#128065;</div>
+    <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
     <div class="label">OUR VISION</div>
     <h3>To Be a Leading Technology Solutions Company</h3>
     <p>To become one of Africa's leading technology companies, recognized for innovation, excellence and delivering world-class digital solutions.</p>
@@ -267,37 +267,37 @@
   <div class="heading">&mdash;&nbsp; OUR CORE VALUES &nbsp;&mdash;</div>
   <div class="values-grid">
     <div class="value-item">
-      <div class="vicon">&#128161;</div>
+      <div class="vicon"><i class="fa-solid fa-lightbulb"></i></div>
       <h4>INNOVATION</h4>
       <p>We embrace creativity and use the latest technologies to build smarter solutions.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#128737;&#65039;</div>
+      <div class="vicon"><i class="fa-solid fa-shield-halved"></i></div>
       <h4>INTEGRITY</h4>
       <p>We are honest, transparent and committed to doing the right things.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#127942;</div>
+      <div class="vicon"><i class="fa-solid fa-award"></i></div>
       <h4>EXCELLENCE</h4>
       <p>We strive for the highest quality in every project we deliver.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#128101;</div>
+      <div class="vicon"><i class="fa-solid fa-user-group"></i></div>
       <h4>CUSTOMER FIRST</h4>
       <p>Our clients are at the heart of everything we do. Your success is our priority.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#129309;</div>
+      <div class="vicon"><i class="fa-solid fa-handshake"></i></div>
       <h4>RELIABILITY</h4>
       <p>We deliver on our promises and build trust through dependable solutions.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#128214;</div>
+      <div class="vicon"><i class="fa-solid fa-book-open"></i></div>
       <h4>CONTINUOUS LEARNING</h4>
       <p>We keep learning and improving to stay ahead in a fast-changing world.</p>
     </div>
     <div class="value-item">
-      <div class="vicon">&#128101;</div>
+      <div class="vicon"><i class="fa-solid fa-people-group"></i></div>
       <h4>TEAMWORK</h4>
       <p>We believe in collaboration and the power of teamwork.</p>
     </div>
@@ -329,7 +329,7 @@
 
 <section class="cta-banner">
   <div class="cta-left">
-    <div class="cta-icon">&#128101;</div>
+    <div class="cta-icon"><i class="fa-solid fa-users"></i></div>
     <div>
       <h3>Let's Build Something Great Together</h3>
       <p>Have a project in mind? Let's discuss how we can help you turn your vision into reality.</p>
@@ -350,7 +350,10 @@
       </div>
       <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
       <div class="socials">
-        <a href="#">f</a><a href="#">t</a><a href="#">in</a><a href="#">ig</a>
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
       </div>
     </div>
     <div class="footer-col">
@@ -377,9 +380,9 @@
     </div>
     <div class="footer-col">
       <h4>CONTACT US</h4>
-      <div class="contact-line">&#128222; info@codenexasolutions.com</div>
-      <div class="contact-line">&#9993;&#65039; info@codenexasolutions.com</div>
-      <div class="contact-line">&#128205; Kenya</div>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexasolutions.com</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
     </div>
   </div>
   <div class="footer-bottom">
