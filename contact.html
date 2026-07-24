@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 48px;
+    background:var(--white);
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:46px;width:auto;}
+  .logo-text{line-height:1.1;}
+  .logo-text .brand{font-size:20px;font-weight:800;letter-spacing:1px;color:var(--navy);}
+  .logo-text .brand span{color:var(--blue-bright);}
+  .logo-text .tagline{font-size:9px;letter-spacing:2px;color:var(--gray-text);font-weight:600;}
+  nav ul{display:flex;gap:32px;align-items:center;}
+  nav a{
+    font-size:15px;font-weight:500;color:#2a3242;
+    padding-bottom:4px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav a.active, nav a:hover{color:var(--blue);border-bottom-color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:11px 22px;border-radius:6px;font-weight:600;font-size:14.5px;
+    cursor:pointer;transition:.2s;border:2px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-outline{background:transparent;border:2px solid #fff;color:#fff;}
+  .btn-outline:hover{background:rgba(255,255,255,0.1);}
+  .btn-light{background:#fff;color:var(--blue);}
+  .btn-light:hover{filter:brightness(0.97);}
+  .btn-whatsapp{background:#25D366;color:#fff;}
+  .btn-whatsapp:hover{filter:brightness(1.05);}
+  .btn-block{width:100%;justify-content:center;}
+
+  /* ---------- Hero (same design as index.html) ---------- */
+  .hero{
+    position:relative;
+    color:#fff;
+    padding:100px 48px 90px;
+    overflow:hidden;
+    background-image:
+      linear-gradient(100deg, rgba(5,11,26,0.94) 0%, rgba(8,18,40,0.88) 40%, rgba(8,18,40,0.55) 75%, rgba(8,18,40,0.35) 100%),
+      url('images/about-office.png');
+    background-size:cover;
+    background-position:center;
+  }
+  .hero-copy{position:relative;z-index:2;max-width:620px;}
+  .hero-eyebrow{
+    color:var(--blue-bright);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:44px;
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{color:var(--blue-bright);}
+  .hero p{
+    font-size:16px;
+    color:#c3cbe0;
+    max-width:520px;
+    margin-bottom:30px;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-bottom:34px;flex-wrap:wrap;}
+  .hero-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 28px;
+    font-size:14.5px;
+    color:#dfe4f2;
+  }
+  .hero-tags li{position:relative;padding-left:14px;}
+  .hero-tags li::before{
+    content:"";
+    position:absolute;left:0;top:8px;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--blue-bright);
+  }
+
+  /* ---------- Contact info cards ---------- */
+  .info-strip{
+    padding:60px 48px 10px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:-70px;
+    position:relative;
+    z-index:5;
+  }
+  .info-card{
+    background:#fff;border-radius:12px;padding:28px 24px;text-align:center;
+    box-shadow:0 14px 34px rgba(20,40,90,0.14);
+    transition:.2s;
+  }
+  .info-card:hover{transform:translateY(-4px);}
+  .info-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin:0 auto 16px;
+  }
+  .info-card h4{font-size:14.5px;color:var(--navy);margin-bottom:8px;letter-spacing:.3px;}
+  .info-card p{font-size:13.5px;color:var(--gray-text);}
+  .info-card a.info-link{
+    display:block;font-size:13.5px;color:#2a3242;font-weight:500;margin-top:2px;
+  }
+  .info-card a.info-link:hover{color:var(--blue);}
+
+  /* ---------- Main contact section ---------- */
+  .contact-section{
+    padding:70px 48px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:40px;
+  }
+  .contact-form-card{
+    background:#fff;border:1px solid #e6e9ef;border-radius:14px;
+    padding:36px;box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .contact-form-card h2{font-size:24px;color:var(--navy);font-weight:800;margin-bottom:8px;}
+  .contact-form-card > p{font-size:14px;color:var(--gray-text);margin-bottom:26px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field-group{margin-bottom:18px;}
+  .field-group label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .field-group label .opt{color:var(--gray-text);font-weight:400;}
+  .field-input-wrap{position:relative;}
+  .field-input-wrap i{
+    position:absolute;left:14px;top:16px;color:var(--gray-text);font-size:14px;
+  }
+  .field-group input,.field-group select,.field-group textarea{
+    width:100%;border:1.5px solid #dfe3ec;border-radius:8px;
+    padding:12px 14px 12px 40px;font-size:14px;color:#1b2434;background:#fbfcfe;
+  }
+  .field-group textarea{padding-left:14px;resize:vertical;min-height:120px;font-family:inherit;}
+  .field-group select{padding-left:14px;appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8"><path d="M1 1l5 5 5-5" stroke="%235b6675" stroke-width="1.6" fill="none"/></svg>');background-repeat:no-repeat;background-position:right 14px center;}
+  .field-group input:focus,.field-group select:focus,.field-group textarea:focus{
+    outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(30,111,224,0.12);
+  }
+  .form-send-btn{
+    width:100%;border:none;border-radius:8px;padding:14px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;
+    font-size:15px;font-weight:700;cursor:pointer;transition:.2s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .form-send-btn:hover{filter:brightness(1.08);}
+  .form-status{
+    display:none;align-items:center;gap:10px;
+    font-size:13px;font-weight:600;border-radius:8px;padding:12px 14px;margin-top:16px;
+  }
+  .form-status.show{display:flex;}
+  .form-status.success{background:#e9f9ef;color:#1a8f4c;}
+  .form-status.error{background:#fdeceb;color:#c0392b;}
+
+  /* ---------- Side column ---------- */
+  .contact-side{display:flex;flex-direction:column;gap:22px;}
+  .side-card{
+    background:#fff;border:1px solid #e6e9ef;border-radius:14px;
+    padding:26px;box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .side-card h4{font-size:15.5px;color:var(--navy);margin-bottom:18px;}
+  .detail-row{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid #eef1f6;}
+  .detail-row:last-child{border-bottom:none;}
+  .detail-icon{
+    width:42px;height:42px;border-radius:10px;flex:none;
+    background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:16px;
+  }
+  .detail-text .label{font-size:12px;color:var(--gray-text);margin-bottom:2px;}
+  .detail-text .value{font-size:13.5px;color:#1b2434;font-weight:600;}
+  .detail-text .value a:hover{color:var(--blue);}
+  .hours-card{background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff;}
+  .hours-card h4{color:#fff;}
+  .hours-row{display:flex;justify-content:space-between;font-size:13.5px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:#dfe4f2;}
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row .day{color:#c3cbe0;}
+  .social-row{display:flex;gap:10px;margin-top:4px;}
+  .social-row a{
+    width:38px;height:38px;border-radius:50%;background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:15px;transition:.2s;
+  }
+  .social-row a:hover{background:var(--blue);color:#fff;}
+
+  /* ---------- Map ---------- */
+  .map-section{padding:0 48px 70px;}
+  .map-wrap{
+    border-radius:14px;overflow:hidden;border:1px solid #e6e9ef;
+    box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .map-wrap iframe{width:100%;height:340px;border:0;display:block;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#aeb6cc;padding:50px 48px 20px;}
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;
+    padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col h4{color:#fff;font-size:14px;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-col ul li{margin-bottom:10px;font-size:13.5px;}
+  .footer-col ul li a:hover{color:var(--blue-bright);}
+  .footer-col ul li a.active{color:var(--blue-bright);}
+  .footer-col .contact-line{display:flex;gap:10px;margin-bottom:12px;font-size:13.5px;}
+  .socials{display:flex;gap:10px;margin-top:16px;}
+  .socials a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+  }
+  .footer-bottom{display:flex;justify-content:space-between;padding-top:20px;font-size:12.5px;}
+  .footer-bottom .brand-mini span{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{display:none;}
+    .hero{padding:60px 24px;}
+    .hero-copy{max-width:100%;}
+    .hero p{margin-left:auto;margin-right:auto;}
+    .hero-ctas{justify-content:center;}
+    .hero-tags{justify-content:center;}
+    .info-strip{grid-template-columns:repeat(2,1fr);padding:40px 20px 10px;margin-top:-40px;}
+    .contact-section{grid-template-columns:1fr;padding:50px 20px;}
+    .form-row{grid-template-columns:1fr;}
+    .map-section{padding:0 20px 50px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="about.html#why-us">Why Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="pricing.html" class="btn btn-primary">Get a Quote &rsaquo;</a>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-eyebrow">GET IN TOUCH</div>
+    <h1>Let's Start a <span class="accent">Conversation.</span></h1>
+    <p>Have a project in mind or a question about our services? Reach out and our team will get back to you as soon as possible.</p>
+    <div class="hero-ctas">
+      <a href="tel:+254700000000" class="btn btn-primary"><i class="fa-solid fa-phone"></i> Call Us Now</a>
+      <a href="https://wa.me/254700000000" class="btn btn-outline"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+    <ul class="hero-tags">
+      <li>+254 700 000 000</li>
+      <li>info@codenexa.co.ke</li>
+      <li>www.codenexa.co.ke</li>
+      <li>Nairobi, Kenya</li>
+    </ul>
+  </div>
+</section>
+
+<section class="info-strip">
+  <div class="info-card">
+    <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+    <h4>Phone Number</h4>
+    <a class="info-link" href="tel:+254700000000">+254 700 000 000</a>
+  </div>
+  <div class="info-card">
+    <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+    <h4>Email Address</h4>
+    <a class="info-link" href="mailto:info@codenexa.co.ke">info@codenexa.co.ke</a>
+  </div>
+  <div class="info-card">
+    <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
+    <h4>Website</h4>
+    <a class="info-link" href="https://www.codenexa.co.ke" target="_blank" rel="noopener">www.codenexa.co.ke</a>
+  </div>
+  <div class="info-card">
+    <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+    <h4>Office Location</h4>
+    <span class="info-link">Nairobi, Kenya</span>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="contact-form-card">
+    <h2>Send Us a Message</h2>
+    <p>Fill in the form below and one of our team members will get back to you shortly.</p>
+
+    <form id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="field-group">
+          <label for="cName">Full Name <span class="opt">(required)</span></label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="cName" name="name" placeholder="Your full name" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="cPhone">Phone Number <span class="opt">(required)</span></label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="cPhone" name="phone" placeholder="e.g. 07XX XXX XXX" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="cEmail">Email Address <span class="opt">(required)</span></label>
+        <div class="field-input-wrap">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" id="cEmail" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="cSubject">Subject <span class="opt">(optional)</span></label>
+        <select id="cSubject" name="subject">
+          <option value="General Inquiry">General Inquiry</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Mobile App Development">Mobile App Development</option>
+          <option value="POS Systems">POS Systems</option>
+          <option value="Cloud Solutions">Cloud Solutions</option>
+          <option value="Support &amp; Maintenance">Support &amp; Maintenance</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="cMessage">Message <span class="opt">(optional)</span></label>
+        <textarea id="cMessage" name="message" placeholder="Tell us a bit about your project or question..."></textarea>
+      </div>
+
+      <button type="submit" class="form-send-btn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+      <div class="form-status" id="contactStatus"></div>
+    </form>
+  </div>
+
+  <div class="contact-side">
+    <div class="side-card">
+      <h4>Contact Details</h4>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="detail-text">
+          <div class="label">Phone</div>
+          <div class="value"><a href="tel:+254700000000">+254 700 000 000</a></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="detail-text">
+          <div class="label">WhatsApp</div>
+          <div class="value"><a href="https://wa.me/254700000000">+254 700 000 000</a></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="detail-text">
+          <div class="label">Email</div>
+          <div class="value"><a href="mailto:info@codenexa.co.ke">info@codenexa.co.ke</a></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-globe"></i></div>
+        <div class="detail-text">
+          <div class="label">Website</div>
+          <div class="value"><a href="https://www.codenexa.co.ke" target="_blank" rel="noopener">www.codenexa.co.ke</a></div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="detail-text">
+          <div class="label">Office</div>
+          <div class="value">Nairobi, Kenya</div>
+        </div>
+      </div>
+      <div class="detail-row">
+        <div class="detail-icon"><i class="fa-solid fa-share-nodes"></i></div>
+        <div class="detail-text">
+          <div class="label">Follow Us</div>
+          <div class="social-row">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-card hours-card">
+      <h4><i class="fa-regular fa-clock"></i> Business Hours</h4>
+      <div class="hours-row"><span class="day">Monday - Friday</span><span>8:00 AM - 6:00 PM</span></div>
+      <div class="hours-row"><span class="day">Saturday</span><span>9:00 AM - 2:00 PM</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span>Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <div class="map-wrap">
+    <iframe src="https://maps.google.com/maps?q=Nairobi%2C%20Kenya&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="CodeNexa Solutions location map"></iframe>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-wrap" style="margin-bottom:14px;">
+        <img src="images/logo.png" alt="CodeNexa Solutions logo" style="height:38px;">
+        <div class="logo-text">
+          <div class="brand" style="color:#fff;font-size:16px;">CODE<span>NEXA</span></div>
+          <div class="tagline">SOLUTIONS</div>
+        </div>
+      </div>
+      <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="about.html#why-us">Why Us</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>OUR SERVICES</h4>
+      <ul>
+        <li>Web Development</li>
+        <li>Mobile Apps</li>
+        <li>POS Systems</li>
+        <li>Desktop Software</li>
+        <li>Cloud Solutions</li>
+        <li>UI/UX Design</li>
+        <li>Maintenance &amp; Support</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexa.co.ke</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> www.codenexa.co.ke</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 CodeNexa Solutions. All rights reserved.</div>
+    <div class="brand-mini">We <span>Code</span> Your Vision</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const status = document.getElementById('contactStatus');
+    const name = document.getElementById('cName').value.trim();
+    const phone = document.getElementById('cPhone').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const subject = document.getElementById('cSubject').value;
+    const message = document.getElementById('cMessage').value.trim();
+
+    if(!name || !phone || !email){
+      status.className = 'form-status show error';
+      status.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please fill in your name, phone number and email.';
+      return;
+    }
+
+    const payload = { name, phone, email, subject, message, page:'contact', submittedAt:new Date().toISOString() };
+
+    try{
+      // TODO: replace with the real backend endpoint once it's ready.
+      await fetch('https://backend.codenexa.co.ke/api/contact-message', {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json' },
+        body:JSON.stringify(payload)
+      });
+    }catch(err){
+      console.warn('Contact endpoint not reachable yet:', err);
+    }
+
+    status.className = 'form-status show success';
+    status.innerHTML = '<i class="fa-solid fa-circle-check"></i> Thank you! Your message has been received — we\'ll be in touch shortly.';
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
