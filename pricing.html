@@ -96,24 +96,8 @@
   .hero-tags li{display:flex;align-items:center;gap:10px;font-size:14.5px;color:#dfe4f2;}
   .hero-tags li i{color:var(--blue-bright);font-size:16px;}
 
-  /* ---------- Pricing toggle ---------- */
-  .pricing-toggle-wrap{
-    display:flex;align-items:center;justify-content:center;gap:14px;
-    margin:-46px 48px 46px;position:relative;z-index:3;
-  }
-  .toggle-pill{
-    display:flex;background:#eef1f6;border-radius:8px;padding:4px;
-    box-shadow:0 10px 30px rgba(20,40,90,0.12);
-  }
-  .toggle-pill button{
-    border:none;background:transparent;padding:10px 22px;border-radius:6px;
-    font-size:14px;font-weight:600;color:var(--gray-text);cursor:pointer;transition:.2s;
-  }
-  .toggle-pill button.active{background:var(--blue);color:#fff;}
-  .save-note{font-size:13.5px;color:var(--blue);font-weight:600;}
-
   /* ---------- Pricing cards ---------- */
-  .pricing-section{padding:0 48px 30px;}
+  .pricing-section{padding:56px 48px 30px;}
   .pricing-grid{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -282,12 +266,118 @@
   }
   .footer-bottom .brand-mini span{color:var(--blue-bright);}
 
+  /* ---------- Quote Request Modal ---------- */
+  .modal-overlay{
+    display:none;
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(6,12,28,0.72);
+    backdrop-filter:blur(3px);
+    align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    width:100%;max-width:440px;
+    background:#fff;border-radius:16px;
+    box-shadow:0 30px 70px rgba(5,11,26,0.4);
+    overflow:hidden;
+    animation:modalPop .25s ease;
+    max-height:92vh;
+    display:flex;flex-direction:column;
+  }
+  @keyframes modalPop{
+    from{opacity:0;transform:translateY(16px) scale(.98);}
+    to{opacity:1;transform:translateY(0) scale(1);}
+  }
+  .modal-head{
+    background:linear-gradient(135deg,var(--navy),var(--navy-deep));
+    color:#fff;padding:22px 24px;
+    display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    flex:none;
+  }
+  .modal-head-icon{
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(255,255,255,0.12);color:var(--blue-bright);
+    display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;
+  }
+  .modal-head-text{flex:1;}
+  .modal-head-text h3{font-size:17px;margin-bottom:3px;}
+  .modal-head-text p{font-size:12.5px;color:#c3cbe0;}
+  .modal-close{
+    background:rgba(255,255,255,0.1);border:none;color:#fff;
+    width:30px;height:30px;border-radius:50%;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-size:13px;transition:.2s;
+  }
+  .modal-close:hover{background:rgba(255,255,255,0.22);}
+  .modal-body{padding:24px;overflow-y:auto;}
+  .modal-plan-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    background:#eaf1fd;color:var(--blue);font-size:12px;font-weight:700;
+    letter-spacing:.5px;padding:6px 12px;border-radius:20px;margin-bottom:18px;
+  }
+  .field-group{margin-bottom:16px;}
+  .field-group label{
+    display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;
+  }
+  .field-group label .opt{color:var(--gray-text);font-weight:400;}
+  .field-input-wrap{position:relative;}
+  .field-input-wrap i{
+    position:absolute;left:14px;top:50%;transform:translateY(-50%);
+    color:var(--gray-text);font-size:14px;
+  }
+  .field-group input,.field-group textarea{
+    width:100%;border:1.5px solid #dfe3ec;border-radius:8px;
+    padding:11px 14px 11px 40px;font-size:14px;color:#1b2434;
+    transition:.2s;background:#fbfcfe;
+  }
+  .field-group textarea{padding-left:14px;resize:vertical;min-height:70px;font-family:inherit;}
+  .field-group input:focus,.field-group textarea:focus{
+    outline:none;border-color:var(--blue);background:#fff;
+    box-shadow:0 0 0 3px rgba(30,111,224,0.12);
+  }
+  .modal-send-btn{
+    width:100%;border:none;border-radius:8px;padding:13px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;
+    font-size:14.5px;font-weight:700;cursor:pointer;transition:.2s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .modal-send-btn:hover{filter:brightness(1.08);}
+  .modal-divider{
+    display:flex;align-items:center;gap:12px;margin:20px 0 16px;
+    font-size:11.5px;color:var(--gray-text);letter-spacing:1px;
+  }
+  .modal-divider::before,.modal-divider::after{content:"";flex:1;height:1px;background:#e6e9ef;}
+  .callback-toggle{
+    width:100%;background:#f5f7fa;border:1.5px dashed #c7cfe0;border-radius:8px;
+    padding:12px;font-size:13.5px;font-weight:600;color:var(--navy);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;
+  }
+  .callback-toggle:hover{background:#eef1f6;border-color:var(--blue);color:var(--blue);}
+  .callback-toggle i{color:var(--blue);}
+  .callback-panel{display:none;margin-top:16px;padding-top:16px;border-top:1px solid #eef1f6;}
+  .callback-panel.open{display:block;}
+  .callback-panel p{font-size:12.5px;color:var(--gray-text);margin-bottom:12px;}
+  .callback-send-btn{
+    width:100%;border:2px solid var(--navy);border-radius:8px;padding:11px;
+    background:transparent;color:var(--navy);font-size:14px;font-weight:700;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;
+  }
+  .callback-send-btn:hover{background:var(--navy);color:#fff;}
+  .modal-status{
+    display:none;align-items:center;gap:10px;
+    font-size:13px;font-weight:600;border-radius:8px;padding:12px 14px;margin-top:14px;
+  }
+  .modal-status.show{display:flex;}
+  .modal-status.success{background:#e9f9ef;color:#1a8f4c;}
+  .modal-status.error{background:#fdeceb;color:#c0392b;}
+  .privacy-note{font-size:11px;color:var(--gray-text);text-align:center;margin-top:14px;}
+
   @media(max-width:980px){
     header{padding:14px 20px;}
     nav ul{display:none;}
     .hero{padding:20px 24px 60px;}
-    .pricing-toggle-wrap{margin:-40px 20px 40px;}
-    .pricing-section{padding:0 20px 20px;}
+    .pricing-section{padding:44px 20px 20px;}
     .pricing-grid{grid-template-columns:repeat(2,1fr);}
     .price-card.featured{transform:none;}
     .included-section{padding:44px 20px 10px;}
@@ -340,14 +430,6 @@
   </div>
 </section>
 
-<div class="pricing-toggle-wrap">
-  <div class="toggle-pill">
-    <button class="active" type="button">Monthly</button>
-    <button type="button">One-Time</button>
-  </div>
-  <span class="save-note"><i class="fa-solid fa-arrow-turn-up" style="transform:scaleX(-1);"></i> Save with a custom package</span>
-</div>
-
 <section class="pricing-section">
   <div class="pricing-grid">
 
@@ -363,7 +445,7 @@
         <li><i class="fa-solid fa-circle-check"></i> Basic SEO</li>
         <li><i class="fa-solid fa-circle-check"></i> 1 Month Support</li>
       </ul>
-      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Get Started</a>
+      <button type="button" class="btn btn-outline-navy btn-block" onclick="openQuoteModal('Basic')">Get Started</button>
     </div>
 
     <div class="price-card">
@@ -379,7 +461,7 @@
         <li><i class="fa-solid fa-circle-check"></i> Social Media Integration</li>
         <li><i class="fa-solid fa-circle-check"></i> 3 Months Support</li>
       </ul>
-      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Get Started</a>
+      <button type="button" class="btn btn-outline-navy btn-block" onclick="openQuoteModal('Standard')">Get Started</button>
     </div>
 
     <div class="price-card featured">
@@ -398,7 +480,7 @@
         <li><i class="fa-solid fa-circle-check"></i> 6 Months Support</li>
         <li><i class="fa-solid fa-circle-check"></i> Priority Support</li>
       </ul>
-      <a href="index.html#contact" class="btn btn-light btn-block">Get Started</a>
+      <button type="button" class="btn btn-light btn-block" onclick="openQuoteModal('Premium')">Get Started</button>
     </div>
 
     <div class="price-card">
@@ -414,7 +496,7 @@
         <li><i class="fa-solid fa-circle-check"></i> Priority Support</li>
         <li><i class="fa-solid fa-circle-check"></i> Maintenance &amp; Training</li>
       </ul>
-      <a href="index.html#contact" class="btn btn-outline-navy btn-block">Contact Us</a>
+      <button type="button" class="btn btn-outline-navy btn-block" onclick="openQuoteModal('Enterprise')">Contact Us</button>
     </div>
 
   </div>
@@ -581,13 +663,176 @@
   </div>
 </footer>
 
+<!-- ---------- Quote Request Modal ---------- -->
+<div class="modal-overlay" id="quoteModal" role="dialog" aria-modal="true" aria-labelledby="quoteModalTitle">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-head-icon"><i class="fa-solid fa-comments"></i></div>
+      <div class="modal-head-text">
+        <h3 id="quoteModalTitle">Request a Quote</h3>
+        <p id="quoteModalSubtitle">Tell us a bit about your project and we'll get back to you shortly.</p>
+      </div>
+      <button type="button" class="modal-close" onclick="closeQuoteModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <span class="modal-plan-tag" id="quoteModalPlanTag"><i class="fa-solid fa-tag"></i> Basic Plan</span>
+
+      <form id="quoteForm" novalidate>
+        <div class="field-group">
+          <label for="quotePhone">Phone Number <span class="opt">(required)</span></label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" id="quotePhone" name="phone" placeholder="e.g. 07XX XXX XXX" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="quoteEmail">Email Address <span class="opt">(required)</span></label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="quoteEmail" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="quoteDetails">Project Details <span class="opt">(optional)</span></label>
+          <textarea id="quoteDetails" name="details" placeholder="Briefly tell us what you need..."></textarea>
+        </div>
+        <button type="submit" class="modal-send-btn"><i class="fa-solid fa-paper-plane"></i> Send Request</button>
+        <div class="modal-status" id="quoteStatus"></div>
+      </form>
+
+      <div class="modal-divider">OR</div>
+
+      <button type="button" class="callback-toggle" id="callbackToggleBtn" onclick="toggleCallbackPanel()">
+        <i class="fa-solid fa-phone-volume"></i> Request a Call Back Instead
+      </button>
+
+      <div class="callback-panel" id="callbackPanel">
+        <p>Leave your number and one of our team will call you back.</p>
+        <form id="callbackForm" novalidate>
+          <div class="field-group">
+            <label for="callbackPhone">Phone Number <span class="opt">(required)</span></label>
+            <div class="field-input-wrap">
+              <i class="fa-solid fa-phone"></i>
+              <input type="tel" id="callbackPhone" name="phone" placeholder="e.g. 07XX XXX XXX" required>
+            </div>
+          </div>
+          <button type="submit" class="callback-send-btn"><i class="fa-solid fa-phone"></i> Request Call Back</button>
+          <div class="modal-status" id="callbackStatus"></div>
+        </form>
+      </div>
+
+      <p class="privacy-note">We respect your privacy. Your details are only used to get in touch about your project.</p>
+    </div>
+  </div>
+</div>
+
 <script>
-  const toggleBtns = document.querySelectorAll('.toggle-pill button');
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      toggleBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
+  /* ---------- Quote Request Modal ---------- */
+  // TODO: replace these placeholder endpoints once the backend is ready.
+  const QUOTE_REQUEST_ENDPOINT = 'https://backend.codenexa.co.ke/api/quote-request';
+  const CALLBACK_REQUEST_ENDPOINT = 'https://backend.codenexa.co.ke/api/callback-request';
+
+  const quoteModal = document.getElementById('quoteModal');
+  const quoteModalPlanTag = document.getElementById('quoteModalPlanTag');
+  const quoteModalSubtitle = document.getElementById('quoteModalSubtitle');
+  const quoteForm = document.getElementById('quoteForm');
+  const quoteStatus = document.getElementById('quoteStatus');
+  const callbackPanel = document.getElementById('callbackPanel');
+  const callbackForm = document.getElementById('callbackForm');
+  const callbackStatus = document.getElementById('callbackStatus');
+
+  function openQuoteModal(planName){
+    quoteModalPlanTag.innerHTML = '<i class="fa-solid fa-tag"></i> ' + planName + ' Plan';
+    quoteModalSubtitle.textContent = 'Tell us a bit about your ' + planName.toLowerCase() + ' project and we\'ll get back to you shortly.';
+    quoteForm.reset();
+    quoteStatus.className = 'modal-status';
+    callbackForm.reset();
+    callbackStatus.className = 'modal-status';
+    callbackPanel.classList.remove('open');
+    quoteModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('quotePhone').focus(), 100);
+  }
+
+  function closeQuoteModal(){
+    quoteModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function toggleCallbackPanel(){
+    callbackPanel.classList.toggle('open');
+    if(callbackPanel.classList.contains('open')){
+      setTimeout(() => document.getElementById('callbackPhone').focus(), 100);
+    }
+  }
+
+  quoteModal.addEventListener('click', (e) => {
+    if(e.target === quoteModal) closeQuoteModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && quoteModal.classList.contains('open')) closeQuoteModal();
+  });
+
+  function showStatus(el, type, message){
+    el.className = 'modal-status show ' + type;
+    el.innerHTML = (type === 'success' ? '<i class="fa-solid fa-circle-check"></i> ' : '<i class="fa-solid fa-circle-exclamation"></i> ') + message;
+  }
+
+  quoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const phone = document.getElementById('quotePhone').value.trim();
+    const email = document.getElementById('quoteEmail').value.trim();
+    const details = document.getElementById('quoteDetails').value.trim();
+    const plan = quoteModalPlanTag.textContent.replace('Plan','').trim();
+
+    if(!phone || !email){
+      showStatus(quoteStatus, 'error', 'Please fill in your phone number and email address.');
+      return;
+    }
+
+    const payload = { plan, phone, email, details, page: 'pricing', submittedAt: new Date().toISOString() };
+
+    try{
+      // Backend endpoint to be created later — this call will start working once it's live.
+      await fetch(QUOTE_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }catch(err){
+      // Network/backend not available yet — still confirm receipt to the user.
+      console.warn('Quote request endpoint not reachable yet:', err);
+    }
+
+    showStatus(quoteStatus, 'success', 'Thank you! Your request has been received — we\'ll be in touch shortly.');
+    quoteForm.reset();
+  });
+
+  callbackForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const phone = document.getElementById('callbackPhone').value.trim();
+
+    if(!phone){
+      showStatus(callbackStatus, 'error', 'Please enter a phone number.');
+      return;
+    }
+
+    const payload = { phone, page: 'pricing', submittedAt: new Date().toISOString() };
+
+    try{
+      // Backend endpoint to be created later — this call will start working once it's live.
+      await fetch(CALLBACK_REQUEST_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    }catch(err){
+      console.warn('Callback request endpoint not reachable yet:', err);
+    }
+
+    showStatus(callbackStatus, 'success', 'Got it! We\'ll call you back soon.');
+    callbackForm.reset();
   });
 </script>
 
