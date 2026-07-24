@@ -431,7 +431,6 @@
       <li><a href="about.html">About Us</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="about.html#why-us">Why Us</a></li>
       <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -628,7 +627,7 @@
   </div>
   <div class="cta-actions">
     <a href="contact.html" class="btn btn-light">Get a Free Quote &rsaquo;</a>
-    <a href="https://wa.me/254700000000" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+    <a href="https://wa.me/254725672771" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
   </div>
 </section>
 
@@ -657,7 +656,6 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="about.html#why-us">Why Us</a></li>
         <li><a href="blog.html">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -676,10 +674,10 @@
     </div>
     <div class="footer-col">
       <h4>CONTACT US</h4>
-      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
-      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexa.co.ke</div>
-      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
-      <div class="contact-line"><i class="fa-solid fa-globe"></i> www.codenexa.co.ke</div>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> 0747 672 771</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> zgichmwa@gmail.com</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Katani, Machakos</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> codenex-lemon.vercel.app</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -754,10 +752,6 @@
 
 <script>
   /* ---------- Quote Request Modal ---------- */
-  // TODO: replace these placeholder endpoints once the backend is ready.
-  const QUOTE_REQUEST_ENDPOINT = 'https://backend.codenexa.co.ke/api/quote-request';
-  const CALLBACK_REQUEST_ENDPOINT = 'https://backend.codenexa.co.ke/api/callback-request';
-
   const quoteModal = document.getElementById('quoteModal');
   const quoteModalPlanTag = document.getElementById('quoteModalPlanTag');
   const quoteModalSubtitle = document.getElementById('quoteModalSubtitle');
@@ -816,21 +810,14 @@
       return;
     }
 
-    const payload = { plan, phone, email, details, page: 'pricing', submittedAt: new Date().toISOString() };
+    // No backend yet — hand the request to the visitor's email app, addressed to us.
+    const bodyLines = ['Plan: ' + plan, 'Phone: ' + phone, 'Email: ' + email, '', details];
+    const mailtoLink = 'mailto:zgichmwa@gmail.com'
+      + '?subject=' + encodeURIComponent('Quote Request: ' + plan + ' Plan')
+      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = mailtoLink;
 
-    try{
-      // Backend endpoint to be created later — this call will start working once it's live.
-      await fetch(QUOTE_REQUEST_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    }catch(err){
-      // Network/backend not available yet — still confirm receipt to the user.
-      console.warn('Quote request endpoint not reachable yet:', err);
-    }
-
-    showStatus(quoteStatus, 'success', 'Thank you! Your request has been received — we\'ll be in touch shortly.');
+    showStatus(quoteStatus, 'success', 'Opening your email app to send this to us — please hit send there to complete it.');
     quoteForm.reset();
   });
 
@@ -843,20 +830,11 @@
       return;
     }
 
-    const payload = { phone, page: 'pricing', submittedAt: new Date().toISOString() };
+    // No backend yet — hand the request off via WhatsApp so we see it immediately.
+    const waMessage = 'Hi CodeNexa, please call me back. My number is ' + phone + '.';
+    window.open('https://wa.me/254725672771?text=' + encodeURIComponent(waMessage), '_blank');
 
-    try{
-      // Backend endpoint to be created later — this call will start working once it's live.
-      await fetch(CALLBACK_REQUEST_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    }catch(err){
-      console.warn('Callback request endpoint not reachable yet:', err);
-    }
-
-    showStatus(callbackStatus, 'success', 'Got it! We\'ll call you back soon.');
+    showStatus(callbackStatus, 'success', 'Opening WhatsApp to send us your callback request.');
     callbackForm.reset();
   });
 </script>

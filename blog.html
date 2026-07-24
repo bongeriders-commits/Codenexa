@@ -312,7 +312,6 @@
       <li><a href="about.html">About Us</a></li>
       <li><a href="services.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="about.html#why-us">Why Us</a></li>
       <li><a href="blog.html" class="active">Blog</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -483,7 +482,7 @@
         <input type="email" id="subscribeEmail" placeholder="Enter your email" required>
         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
       </form>
-      <div class="subscribe-status" id="subscribeStatus"><i class="fa-solid fa-circle-check"></i> Thanks for subscribing!</div>
+      <div class="subscribe-status" id="subscribeStatus"><i class="fa-solid fa-circle-check"></i> Opening your email app — please hit send to confirm your subscription.</div>
     </div>
   </aside>
 </div>
@@ -527,7 +526,6 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="about.html#why-us">Why Us</a></li>
         <li><a href="blog.html" class="active">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -546,10 +544,10 @@
     </div>
     <div class="footer-col">
       <h4>CONTACT US</h4>
-      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
-      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexa.co.ke</div>
-      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
-      <div class="contact-line"><i class="fa-solid fa-globe"></i> www.codenexa.co.ke</div>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> 0747 672 771</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> zgichmwa@gmail.com</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Katani, Machakos</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> codenex-lemon.vercel.app</div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -571,6 +569,12 @@
   document.getElementById('subscribeForm').addEventListener('submit', function(e){
     e.preventDefault();
     const status = document.getElementById('subscribeStatus');
+    const subEmail = document.getElementById('subscribeEmail').value.trim();
+    // No newsletter tool set up yet — hand the address to us via email so it isn't lost.
+    const mailtoLink = 'mailto:zgichmwa@gmail.com'
+      + '?subject=' + encodeURIComponent('Blog Subscription Request')
+      + '&body=' + encodeURIComponent('Please add this email to the blog subscriber list: ' + subEmail);
+    window.location.href = mailtoLink;
     status.classList.add('show');
     this.reset();
   });
