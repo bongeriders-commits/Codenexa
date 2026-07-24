@@ -21,6 +21,10 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 500, { ok: false, error: 'Admin login is not configured yet.' });
   }
 
+  // TEMPORARY DEBUG — remove after troubleshooting
+  console.log('DEBUG expected length:', expected.length, JSON.stringify(expected));
+  console.log('DEBUG received length:', (password || '').length, JSON.stringify(password));
+
   if (!password || !safeEqual(password, expected)) {
     return sendJson(res, 401, { ok: false, error: 'Incorrect password.' });
   }
