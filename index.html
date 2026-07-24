@@ -92,15 +92,17 @@
 
   /* ---------- Hero ---------- */
   .hero{
-    background:radial-gradient(ellipse at 75% 30%, #10275a 0%, var(--navy-deep) 55%, #050b1a 100%);
+    position:relative;
     color:#fff;
-    padding:90px 48px 70px;
-    display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:40px;
-    align-items:center;
+    padding:100px 48px 90px;
     overflow:hidden;
+    background-image:
+      linear-gradient(100deg, rgba(5,11,26,0.94) 0%, rgba(8,18,40,0.88) 40%, rgba(8,18,40,0.55) 75%, rgba(8,18,40,0.35) 100%),
+      url('images/about-office.png');
+    background-size:cover;
+    background-position:center;
   }
+  .hero-copy{position:relative;z-index:2;max-width:620px;}
   .hero-eyebrow{
     color:var(--blue-bright);
     font-size:13px;
@@ -136,18 +138,7 @@
     width:6px;height:6px;border-radius:50%;
     background:var(--blue-bright);
   }
-  .hero-visual{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-  }
-  .hero-visual img{
-    max-width:520px;
-    width:100%;
-    border-radius:12px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.45);
-  }
+
 
   /* ---------- Services strip ---------- */
   .services{
@@ -251,7 +242,8 @@
   @media(max-width:980px){
     header{padding:14px 20px;}
     nav ul{display:none;}
-    .hero{grid-template-columns:1fr;padding:60px 24px;text-align:center;}
+    .hero{padding:60px 24px;text-align:center;}
+    .hero-copy{max-width:100%;}
     .hero p{margin-left:auto;margin-right:auto;}
     .hero-ctas{justify-content:center;}
     .hero-tags{justify-content:center;}
@@ -303,9 +295,6 @@
       <li>Cloud Solutions</li>
       <li>UI/UX Design</li>
     </ul>
-  </div>
-  <div class="hero-visual">
-    <img src="images/about-office.png" alt="CodeNexa Solutions office">
   </div>
 </section>
 
