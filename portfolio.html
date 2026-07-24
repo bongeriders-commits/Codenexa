@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 48px;
+    background:var(--white);
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:46px;width:auto;}
+  .logo-text{line-height:1.1;}
+  .logo-text .brand{font-size:20px;font-weight:800;letter-spacing:1px;color:var(--navy);}
+  .logo-text .brand span{color:var(--blue-bright);}
+  .logo-text .tagline{font-size:9px;letter-spacing:2px;color:var(--gray-text);font-weight:600;}
+  nav ul{display:flex;gap:32px;align-items:center;}
+  nav a{
+    font-size:15px;font-weight:500;color:#2a3242;
+    padding-bottom:4px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav a.active, nav a:hover{color:var(--blue);border-bottom-color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:11px 22px;border-radius:6px;font-weight:600;font-size:14.5px;
+    cursor:pointer;transition:.2s;border:2px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-outline-light{background:transparent;border:2px solid rgba(255,255,255,0.4);color:#fff;}
+  .btn-outline-light:hover{background:rgba(255,255,255,0.1);}
+  .btn-whatsapp{background:#25D366;color:#fff;border:2px solid #25D366;}
+  .btn-whatsapp:hover{filter:brightness(1.05);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    color:#fff;
+    padding:90px 48px;
+    background-image:
+      linear-gradient(100deg, rgba(5,11,26,0.94) 0%, rgba(8,18,40,0.88) 40%, rgba(8,18,40,0.55) 75%, rgba(8,18,40,0.35) 100%),
+      url('images/about-office.png');
+    background-size:cover;
+    background-position:center;
+  }
+  .hero-copy{position:relative;z-index:2;max-width:620px;}
+  .hero .eyebrow{color:var(--blue-bright);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:16px;}
+  .hero h1{font-size:40px;font-weight:800;line-height:1.2;margin-bottom:20px;}
+  .hero h1 span{color:var(--blue-bright);}
+  .hero p{font-size:15.5px;color:#c3cbe0;max-width:520px;}
+
+  /* ---------- Filters ---------- */
+  .filters{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    justify-content:center;
+    padding:44px 48px 10px;
+  }
+  .filter-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:30px;
+    font-size:14px;font-weight:600;
+    border:1.5px solid #dfe3ec;
+    color:#2a3242;
+    background:#fff;
+    cursor:pointer;
+    transition:.2s;
+  }
+  .filter-btn i{font-size:13px;}
+  .filter-btn.active{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    border-color:transparent;
+    color:#fff;
+  }
+
+  /* ---------- Projects grid ---------- */
+  .projects-section{padding:30px 48px 20px;}
+  .projects-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .project-card{
+    background:#fff;
+    border:1px solid #e6e9ef;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(20,40,90,0.06);
+    transition:.2s;
+  }
+  .project-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(20,40,90,0.14);}
+  .project-thumb{
+    aspect-ratio:4/3;
+    overflow:hidden;
+    background:var(--light-bg);
+  }
+  .project-thumb img{width:100%;height:100%;object-fit:cover;}
+  .project-body{padding:20px 22px 22px;}
+  .project-tag{
+    font-size:11.5px;font-weight:700;letter-spacing:1px;
+    color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+    display:block;
+  }
+  .project-body h3{font-size:17px;color:var(--navy);margin-bottom:8px;}
+  .project-body p{font-size:13.5px;color:var(--gray-text);margin-bottom:14px;}
+  .view-project{
+    font-size:13.5px;font-weight:600;color:var(--blue);
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .view-project i{font-size:11px;transition:.2s;}
+  .project-card:hover .view-project i{transform:translateX(3px);}
+
+  .view-more-wrap{text-align:center;margin:44px 0 10px;}
+  .btn-outline-blue{
+    background:transparent;border:2px solid var(--blue);color:var(--blue);
+  }
+  .btn-outline-blue:hover{background:#eaf1fd;}
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    margin:60px 48px 0;
+    background:linear-gradient(90deg,var(--navy-deep),var(--navy));
+    color:#fff;
+    padding:32px 40px;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .cta-left{display:flex;align-items:center;gap:20px;}
+  .cta-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;
+  }
+  .cta-left h3{font-size:19px;margin-bottom:4px;}
+  .cta-left p{font-size:13.5px;color:#c3cbe0;}
+  .cta-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#aeb6cc;padding:50px 48px 20px;margin-top:60px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col h4{color:#fff;font-size:14px;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-col ul li{margin-bottom:10px;font-size:13.5px;}
+  .footer-col ul li a:hover{color:var(--blue-bright);}
+  .footer-col ul li a.active{color:var(--blue-bright);}
+  .footer-col .contact-line{display:flex;gap:10px;margin-bottom:12px;font-size:13.5px;}
+  .socials{display:flex;gap:10px;margin-top:16px;}
+  .socials a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+  }
+  .footer-bottom{
+    display:flex;justify-content:space-between;
+    padding-top:20px;font-size:12.5px;
+  }
+  .footer-bottom .brand-mini span{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{display:none;}
+    .hero{padding:50px 24px;}
+    .filters{padding:34px 20px 10px;}
+    .projects-section{padding:20px 20px 10px;}
+    .projects-grid{grid-template-columns:repeat(2,1fr);}
+    .cta-banner{margin:50px 20px 0;flex-direction:column;text-align:center;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="about.html#why-us">Why Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="index.html#contact" class="btn btn-primary">Get a Quote &rsaquo;</a>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">OUR PORTFOLIO</div>
+    <h1>Our Recent <span>Work</span></h1>
+    <p>Explore some of the innovative solutions we have built for our amazing clients. Quality, creativity and performance in every project.</p>
+  </div>
+</section>
+
+<div class="filters">
+  <button class="filter-btn active">All Projects</button>
+  <button class="filter-btn"><i class="fa-solid fa-code"></i> Web Development</button>
+  <button class="filter-btn"><i class="fa-solid fa-mobile-screen-button"></i> Mobile Apps</button>
+  <button class="filter-btn"><i class="fa-solid fa-cart-shopping"></i> POS Systems</button>
+  <button class="filter-btn"><i class="fa-solid fa-desktop"></i> Desktop Software</button>
+  <button class="filter-btn"><i class="fa-solid fa-grip"></i> Other Solutions</button>
+</div>
+
+<section class="projects-section" id="portfolio">
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-1.png" alt="TriNest Savings App"></div>
+      <div class="project-body">
+        <span class="project-tag">Mobile App</span>
+        <h3>TriNest Savings App</h3>
+        <p>A savings tracking app for three members to record deposits and manage their group savings efficiently.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-2.png" alt="Cabrocity POS"></div>
+      <div class="project-body">
+        <span class="project-tag" style="color:#1f9d55;">POS System</span>
+        <h3>CABROCITY POS</h3>
+        <p>A complete POS solution for quarry operations with lorry tonnage, sales, credit management and reporting.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-3.png" alt="Bogonko Rosca"></div>
+      <div class="project-body">
+        <span class="project-tag">Web Application</span>
+        <h3>BOGONKO ROSCA</h3>
+        <p>A ROSCA (chama) management app for 30 members with daily contributions and rotation tracking.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-4.png" alt="SACCO Management System"></div>
+      <div class="project-body">
+        <span class="project-tag">Web Application</span>
+        <h3>SACCO Management System</h3>
+        <p>A comprehensive SACCO management system with member management, loans, savings and reports.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-5.png" alt="E-Commerce Website"></div>
+      <div class="project-body">
+        <span class="project-tag" style="color:#7b2fd6;">Web Development</span>
+        <h3>E-Commerce Website</h3>
+        <p>Modern and responsive online store with product management, cart, payments and order tracking.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-6.png" alt="School Management System"></div>
+      <div class="project-body">
+        <span class="project-tag">Web Application</span>
+        <h3>School Management System</h3>
+        <p>Manage students, teachers, classes, fees, attendance and exams in one integrated system.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-7.png" alt="Moto-Orbit Logistics"></div>
+      <div class="project-body">
+        <span class="project-tag">Mobile App</span>
+        <h3>Moto-Orbit Logistics</h3>
+        <p>Courier and delivery management app for riders and customers with real-time tracking.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-thumb"><img src="images/project-8.png" alt="Inventory Management System"></div>
+      <div class="project-body">
+        <span class="project-tag" style="color:#d97706;">Desktop Software</span>
+        <h3>Inventory Management System</h3>
+        <p>Powerful desktop software to manage stock, sales, suppliers, purchases and reports.</p>
+        <a href="#" class="view-project">View Project <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="view-more-wrap">
+    <a href="#" class="btn btn-outline-blue">View More Projects &rsaquo;</a>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-left">
+    <div class="cta-icon"><i class="fa-solid fa-rocket"></i></div>
+    <div>
+      <h3>Have a Project in Mind?</h3>
+      <p>Let's bring your ideas to life with innovative solutions that drive real results for your business.</p>
+    </div>
+  </div>
+  <div class="cta-actions">
+    <a href="index.html#contact" class="btn btn-primary">Get a Free Quote &rsaquo;</a>
+    <a href="https://wa.me/254700000000" class="btn btn-outline-light"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-wrap" style="margin-bottom:14px;">
+        <img src="images/logo.png" alt="CodeNexa Solutions logo" style="height:38px;">
+        <div class="logo-text">
+          <div class="brand" style="color:#fff;font-size:16px;">CODE<span>NEXA</span></div>
+          <div class="tagline">SOLUTIONS</div>
+        </div>
+      </div>
+      <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+        <li><a href="about.html#why-us">Why Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>OUR SERVICES</h4>
+      <ul>
+        <li>Web Development</li>
+        <li>Mobile Apps</li>
+        <li>POS Systems</li>
+        <li>Desktop Software</li>
+        <li>Cloud Solutions</li>
+        <li>UI/UX Design</li>
+        <li>Maintenance &amp; Support</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> +254 700 000 000</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> info@codenexa.co.ke</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> www.codenexa.co.ke</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 CodeNexa Solutions. All rights reserved.</div>
+    <div class="brand-mini">We <span>Code</span> Your Vision</div>
+  </div>
+</footer>
+
+</body>
+</html>
