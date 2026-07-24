@@ -288,6 +288,51 @@
   @media(max-width:620px){
     .articles-grid{grid-template-columns:1fr;}
   }
+
+  /* ---------- Article Modal ---------- */
+  .article-modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(8,12,28,0.72);
+    z-index:1000;padding:40px 20px;overflow-y:auto;
+  }
+  .article-modal-overlay.open{display:block;}
+  .article-modal{
+    background:#fff;max-width:780px;margin:0 auto;border-radius:14px;
+    overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.35);
+    animation:modalIn .25s ease;
+  }
+  @keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  .article-modal-hero{
+    position:relative;height:260px;background:linear-gradient(135deg,var(--navy),var(--navy-deep));
+  }
+  .article-modal-hero img{width:100%;height:100%;object-fit:cover;}
+  .article-modal-close{
+    position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+    background:rgba(8,12,28,0.55);color:#fff;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;
+  }
+  .article-modal-close:hover{background:rgba(8,12,28,0.8);}
+  .article-modal-body{padding:36px 40px 44px;}
+  .article-modal-tag{
+    font-size:11.5px;font-weight:700;letter-spacing:1px;color:var(--blue);
+    margin-bottom:12px;text-transform:uppercase;
+  }
+  .article-modal-body h1{font-size:28px;color:var(--navy);line-height:1.3;margin-bottom:14px;}
+  .article-modal-meta{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    font-size:12.5px;color:var(--gray-text);border-bottom:1px solid #eef1f6;
+    padding-bottom:20px;margin-bottom:26px;
+  }
+  .article-modal-meta i{margin-right:5px;color:#9aa4b8;}
+  .article-modal-content{font-size:15px;color:#2a3242;line-height:1.75;}
+  .article-modal-content h2{font-size:19px;color:var(--navy);margin:28px 0 12px;font-weight:700;}
+  .article-modal-content p{margin-bottom:16px;}
+  .article-modal-content p:first-of-type{font-size:16px;color:#1b2434;}
+  @media(max-width:620px){
+    .article-modal-overlay{padding:0;}
+    .article-modal{max-width:100%;border-radius:0;min-height:100vh;}
+    .article-modal-body{padding:26px 22px 36px;}
+    .article-modal-body h1{font-size:23px;}
+  }
 </style>
 </head>
 <body>
@@ -346,8 +391,8 @@
           <h3>10 Essential Features Every Business Website Must Have</h3>
           <p>Discover the must-have features that make your website professional, user-friendly and effective.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>May 19, 2026 &nbsp;&middot;&nbsp; 5 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 24, 2026, 3:55 PM &nbsp;&middot;&nbsp; 7 min read</span>
+            <a href="#" class="read-more" id="readMoreArticle1">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
@@ -359,7 +404,7 @@
           <h3>UI/UX Best Practices for Better User Experience</h3>
           <p>Good design is more than looks. Learn the best practices that create amazing user experiences.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>May 15, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 18, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
             <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
@@ -372,7 +417,7 @@
           <h3>How POS Systems Can Transform Your Business</h3>
           <p>Explore the benefits of using a POS system to streamline operations and increase profits.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>May 10, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 10, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
             <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
@@ -385,7 +430,7 @@
           <h3>Why Your Business Should Move to the Cloud</h3>
           <p>The cloud is the future. See how cloud solutions can reduce costs and improve efficiency.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>May 5, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 2, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
             <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
@@ -398,7 +443,7 @@
           <h3>Top Trends in Mobile App Development 2026</h3>
           <p>Stay ahead of the game with these top mobile app development trends to watch this year.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Apr 28, 2026 &nbsp;&middot;&nbsp; 5 min read</span>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jun 24, 2026 &nbsp;&middot;&nbsp; 5 min read</span>
             <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
@@ -411,7 +456,7 @@
           <h3>7 Tips to Keep Your Business Data Secure</h3>
           <p>Protect your business and customer data with these practical cybersecurity best practices.</p>
           <div class="article-meta">
-            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Apr 20, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
+            <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jun 15, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
             <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
@@ -449,28 +494,28 @@
         <div class="pop-thumb"><i class="fa-solid fa-laptop-code"></i></div>
         <div>
           <h5>10 Essential Features Every Business Website Must Have</h5>
-          <div class="pop-date">May 19, 2026</div>
+          <div class="pop-date">Jul 24, 2026</div>
         </div>
       </div>
       <div class="pop-row">
         <div class="pop-thumb"><i class="fa-solid fa-cash-register"></i></div>
         <div>
           <h5>How POS Systems Can Transform Your Business</h5>
-          <div class="pop-date">May 10, 2026</div>
+          <div class="pop-date">Jul 10, 2026</div>
         </div>
       </div>
       <div class="pop-row">
         <div class="pop-thumb"><i class="fa-solid fa-cloud-arrow-up"></i></div>
         <div>
           <h5>Why Your Business Should Move to the Cloud</h5>
-          <div class="pop-date">May 5, 2026</div>
+          <div class="pop-date">Jul 2, 2026</div>
         </div>
       </div>
       <div class="pop-row">
         <div class="pop-thumb"><i class="fa-solid fa-lock"></i></div>
         <div>
           <h5>7 Tips to Keep Your Business Data Secure</h5>
-          <div class="pop-date">Apr 20, 2026</div>
+          <div class="pop-date">Jun 15, 2026</div>
         </div>
       </div>
     </div>
@@ -501,6 +546,59 @@
     <a href="contact.html" class="btn btn-outline-white">Contact Us &rsaquo;</a>
   </div>
 </section>
+
+<div class="article-modal-overlay" id="articleModalOverlay">
+  <div class="article-modal">
+    <div class="article-modal-hero">
+      <button class="article-modal-close" id="articleModalClose" aria-label="Close article"><i class="fa-solid fa-xmark"></i></button>
+      <img src="images/blog-1-code-editor.png" alt="10 Essential Features Every Business Website Must Have">
+    </div>
+    <div class="article-modal-body">
+      <div class="article-modal-tag">Web Development</div>
+      <h1>10 Essential Features Every Business Website Must Have</h1>
+      <div class="article-modal-meta">
+        <span><i class="fa-regular fa-calendar"></i>Jul 24, 2026, 3:55 PM</span>
+        <span><i class="fa-regular fa-clock"></i>7 min read</span>
+      </div>
+      <div class="article-modal-content">
+        <p>In today's competitive digital economy, your website often serves as the first point of contact between your business and a potential customer. Before a prospect ever picks up the phone or walks through your door, they've already formed an opinion about your business based on your site. A poorly designed, slow, or confusing website doesn't just fail to impress &mdash; it actively costs you leads, sales, and credibility. Below, we break down the ten essential features that separate a professional, high-performing business website from one that quietly drives customers away.</p>
+
+        <h2>1. Mobile-Responsive Design</h2>
+        <p>More than half of global web traffic now originates from smartphones and tablets, and that share continues to grow year over year. A responsive website automatically adapts its layout, images, and navigation to fit any screen size, ensuring a seamless experience whether a visitor is on a desktop monitor or a mobile device. Businesses that neglect mobile optimization risk alienating the majority of their audience &mdash; and search engines like Google now prioritize mobile-friendly sites in their rankings, meaning poor responsiveness can hurt your visibility as well as your conversions.</p>
+
+        <h2>2. Fast Loading Speed</h2>
+        <p>Page speed is not a technical afterthought &mdash; it is a direct driver of business outcomes. Research consistently shows that a one-second delay in load time can significantly reduce conversion rates, and most visitors will abandon a page that takes longer than three seconds to load. Achieving fast performance requires attention to image compression, efficient code, reliable hosting infrastructure, and minimizing unnecessary scripts. In a marketplace where competitors are one click away, speed is a competitive advantage.</p>
+
+        <h2>3. Clear, Intuitive Navigation</h2>
+        <p>Visitors should never have to think twice about where to find information. A logical, well-structured navigation menu &mdash; typically featuring Home, About, Services, Portfolio, and Contact &mdash; allows users to move through your site efficiently and locate what they need without frustration. Confusing or cluttered navigation increases bounce rates and signals a lack of professionalism, while intuitive structure builds confidence and keeps visitors engaged longer.</p>
+
+        <h2>4. A Strong, Strategic Call to Action</h2>
+        <p>Every page on your website should have a clear purpose and guide the visitor toward a specific next step &mdash; requesting a quote, scheduling a consultation, or making a purchase. Calls to action should be visually distinct, strategically placed, and written with action-oriented language. A website without clear direction leaves visitors uncertain about how to engage further, resulting in missed opportunities even when interest is high.</p>
+
+        <h2>5. Professional, On-Brand Visual Design</h2>
+        <p>Your website's visual presentation communicates credibility before a single word is read. Consistent branding &mdash; including color palette, typography, imagery, and layout &mdash; reinforces trust and professionalism. Generic stock photography, mismatched design elements, or an outdated aesthetic can undermine even the strongest value proposition. Investing in cohesive, high-quality design signals to prospective clients that you invest the same care into your products or services.</p>
+
+        <h2>6. Accessible Contact Information</h2>
+        <p>Prospective clients should be able to reach your business within a click or two, regardless of which page they land on. This includes a visible phone number, email address, physical location where applicable, and a functional contact form. Businesses that bury or omit contact details create unnecessary friction, often losing leads who simply give up and turn to a competitor with clearer access.</p>
+
+        <h2>7. Search Engine Optimization (SEO) Fundamentals</h2>
+        <p>A well-designed website delivers little value if potential customers cannot find it. Foundational SEO practices &mdash; including optimized page titles, meta descriptions, image alt text, and clean URL structures &mdash; help search engines understand and index your content correctly. Strong SEO fundamentals drive sustainable, organic traffic over time, reducing long-term dependence on paid advertising and expanding your reach to customers actively searching for your services.</p>
+
+        <h2>8. Website Security (SSL/HTTPS)</h2>
+        <p>Security is no longer optional, even for businesses that don't process online payments. An SSL certificate, indicated by "https://" and a padlock icon in the browser bar, protects data transmitted through your site and reassures visitors that your business takes their privacy seriously. Modern browsers actively flag unsecured sites as "Not Secure," which can immediately erode trust, while search engines factor security into ranking algorithms &mdash; making it both a trust signal and an SEO consideration.</p>
+
+        <h2>9. Social Proof and Credibility Indicators</h2>
+        <p>Testimonials, client reviews, case studies, and recognizable client logos provide third-party validation that your business delivers on its promises. Social proof addresses a fundamental psychological barrier to purchasing decisions: uncertainty. When prospective customers see evidence that others have had positive experiences with your business, hesitation gives way to confidence, often accelerating the decision-making process.</p>
+
+        <h2>10. Manageable, Scalable Content Infrastructure</h2>
+        <p>A business website should be easy to maintain and update over time &mdash; whether that means publishing new blog content, adjusting pricing, or introducing new team members and services. A well-structured content management approach eliminates the need for constant developer involvement, allowing your business to keep information current and respond quickly to market changes without operational bottlenecks.</p>
+
+        <h2>Conclusion</h2>
+        <p>A business website is far more than a digital placeholder &mdash; it is a strategic asset that actively works to build trust, answer customer questions, and convert interest into revenue. By ensuring your site incorporates these ten foundational elements, you position your business for stronger engagement, improved credibility, and measurable growth in an increasingly digital-first marketplace.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer id="contact">
   <div class="footer-grid">
@@ -566,6 +664,32 @@
       // No additional articles exist yet — keep the user on page 1.
     });
   });
+
+  (function(){
+    var overlay = document.getElementById('articleModalOverlay');
+    var openLink = document.getElementById('readMoreArticle1');
+    var closeBtn = document.getElementById('articleModalClose');
+
+    function openModal(e){
+      if(e) e.preventDefault();
+      overlay.classList.add('open');
+      overlay.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if(openLink) openLink.addEventListener('click', openModal);
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    });
+  })();
 
   document.getElementById('subscribeForm').addEventListener('submit', async function(e){
     e.preventDefault();
