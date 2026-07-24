@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeNexa Solutions | We Code Your Vision</title>
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 48px;
+    background:var(--white);
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:46px;width:auto;}
+  .logo-text{line-height:1.1;}
+  .logo-text .brand{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:var(--navy);
+  }
+  .logo-text .brand span{color:var(--blue-bright);}
+  .logo-text .tagline{
+    font-size:9px;
+    letter-spacing:2px;
+    color:var(--gray-text);
+    font-weight:600;
+  }
+  nav ul{display:flex;gap:32px;align-items:center;}
+  nav a{
+    font-size:15px;
+    font-weight:500;
+    color:#2a3242;
+    padding-bottom:4px;
+    border-bottom:2px solid transparent;
+    transition:.2s;
+  }
+  nav a.active, nav a:hover{
+    color:var(--blue);
+    border-bottom-color:var(--blue);
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:11px 22px;
+    border-radius:6px;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+    transition:.2s;
+    border:2px solid transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+  }
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-outline{
+    background:transparent;
+    border:2px solid #fff;
+    color:#fff;
+  }
+  .btn-outline:hover{background:rgba(255,255,255,0.1);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:radial-gradient(ellipse at 75% 30%, #10275a 0%, var(--navy-deep) 55%, #050b1a 100%);
+    color:#fff;
+    padding:90px 48px 70px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+    overflow:hidden;
+  }
+  .hero-eyebrow{
+    color:var(--blue-bright);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:44px;
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:20px;
+  }
+  .hero h1 .accent{color:var(--blue-bright);}
+  .hero p{
+    font-size:16px;
+    color:#c3cbe0;
+    max-width:520px;
+    margin-bottom:30px;
+  }
+  .hero-ctas{display:flex;gap:16px;margin-bottom:34px;}
+  .hero-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 28px;
+    font-size:14.5px;
+    color:#dfe4f2;
+  }
+  .hero-tags li{position:relative;padding-left:14px;}
+  .hero-tags li::before{
+    content:"";
+    position:absolute;left:0;top:8px;
+    width:6px;height:6px;border-radius:50%;
+    background:var(--blue-bright);
+  }
+  .hero-visual{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .hero-visual img{
+    max-width:520px;
+    width:100%;
+    border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.45);
+  }
+
+  /* ---------- Services strip ---------- */
+  .services{
+    background:var(--light-bg);
+    padding:60px 48px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:0;
+  }
+  .service-card{
+    background:#fff;
+    padding:0 28px;
+    text-align:left;
+    border-right:1px solid #e6e9ef;
+  }
+  .service-card:last-child{border-right:none;}
+  .service-card .service-img{
+    width:100%;
+    border-radius:8px;
+    margin-bottom:18px;
+    box-shadow:0 8px 24px rgba(20,40,90,0.15);
+    background:#0d1b3d;
+  }
+  .service-icon{
+    width:40px;height:40px;
+    border-radius:50%;
+    background:var(--blue);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
+    margin-bottom:14px;
+  }
+  .service-card h3{font-size:17px;margin-bottom:6px;color:var(--navy);}
+  .service-card p{font-size:14px;color:var(--gray-text);}
+
+  /* ---------- Stats bar ---------- */
+  .stats{
+    background:linear-gradient(90deg,var(--navy-deep),var(--navy));
+    color:#fff;
+    padding:36px 48px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    text-align:center;
+  }
+  .stats .stat{border-right:1px solid rgba(255,255,255,0.15);padding:0 10px;}
+  .stats .stat:last-child{border-right:none;}
+  .stats .stat .num{font-size:30px;font-weight:800;color:var(--blue-bright);}
+  .stats .stat .label{font-size:13.5px;color:#c3cbe0;margin-top:2px;}
+
+  /* ---------- About ---------- */
+  .about{
+    padding:80px 48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+  }
+  .about .eyebrow{
+    color:var(--blue);
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:2px;
+    margin-bottom:10px;
+  }
+  .about h2{
+    font-size:32px;
+    color:var(--navy);
+    font-weight:800;
+    margin-bottom:18px;
+  }
+  .about h2 span{color:var(--blue);}
+  .about p{color:var(--gray-text);font-size:15px;margin-bottom:26px;max-width:520px;}
+  .about-img{border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(10,26,60,0.25);}
+
+  .values{
+    padding:0 48px 80px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+  }
+  .value-card{
+    background:#fff;
+    border:1px solid #e6e9ef;
+    border-radius:10px;
+    padding:26px 22px;
+    box-shadow:0 6px 18px rgba(20,40,90,0.06);
+  }
+  .value-card .vicon{color:var(--blue);font-size:22px;margin-bottom:12px;}
+  .value-card h4{font-size:15.5px;color:var(--navy);margin-bottom:6px;}
+  .value-card p{font-size:13.5px;color:var(--gray-text);}
+
+  footer{
+    background:var(--navy-deep);
+    color:#aeb6cc;
+    text-align:center;
+    padding:30px;
+    font-size:13.5px;
+  }
+  footer a{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{display:none;}
+    .hero{grid-template-columns:1fr;padding:60px 24px;text-align:center;}
+    .hero p{margin-left:auto;margin-right:auto;}
+    .hero-ctas{justify-content:center;}
+    .hero-tags{justify-content:center;}
+    .services,.values{grid-template-columns:repeat(2,1fr);padding:40px 20px;}
+    .service-card{border-right:none;border-bottom:1px solid #e6e9ef;padding-bottom:24px;margin-bottom:10px;}
+    .stats{grid-template-columns:repeat(2,1fr);gap:24px 0;padding:30px 20px;}
+    .stats .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,0.15);padding-bottom:16px;}
+    .about{grid-template-columns:1fr;padding:50px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="btn btn-primary">Get a Quote &rsaquo;</a>
+</header>
+
+<section class="hero">
+  <div class="hero-copy">
+    <div class="hero-eyebrow">WELCOME TO CODENEXA SOLUTIONS</div>
+    <h1>Turning Ideas Into Powerful Digital <span class="accent">Solutions.</span></h1>
+    <p>We build modern websites, mobile apps, POS systems and custom software that help your business grow, work smarter and achieve more.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary">Get a Quote &rsaquo;</a>
+      <a href="#portfolio" class="btn btn-outline">View Portfolio &rsaquo;</a>
+    </div>
+    <ul class="hero-tags">
+      <li>Web Development</li>
+      <li>Mobile Apps</li>
+      <li>POS Systems</li>
+      <li>Business Software</li>
+      <li>Cloud Solutions</li>
+      <li>UI/UX Design</li>
+    </ul>
+  </div>
+  <div class="hero-visual">
+    <img src="images/about-office.png" alt="CodeNexa Solutions office">
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="service-card">
+    <img class="service-img" src="images/img1_business.png" alt="Business Solutions dashboard">
+    <h3>Business Solutions</h3>
+    <p>Custom systems that simplify operations and boost productivity.</p>
+  </div>
+  <div class="service-card">
+    <img class="service-img" src="images/img2_mobile.png" alt="Mobile app screen">
+    <h3>Mobile Apps</h3>
+    <p>Powerful mobile applications for Android.</p>
+  </div>
+  <div class="service-card">
+    <img class="service-img" src="images/img3_pos.png" alt="POS system screen">
+    <h3>POS Systems</h3>
+    <p>Smart POS systems for retail, quarries, shops and more.</p>
+  </div>
+  <div class="service-card">
+    <img class="service-img" src="images/img4_webdev.png" alt="Web development code editor">
+    <h3>Web Development</h3>
+    <p>Modern, responsive websites that represent your brand.</p>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="num">100+</div><div class="label">Happy Clients</div></div>
+  <div class="stat"><div class="num">250+</div><div class="label">Projects Completed</div></div>
+  <div class="stat"><div class="num">5+</div><div class="label">Years Experience</div></div>
+  <div class="stat"><div class="num">24/7</div><div class="label">Support Available</div></div>
+</section>
+
+<section class="about" id="about">
+  <div>
+    <div class="eyebrow">ABOUT US</div>
+    <h2>We Are <span>CODENEXA</span> Solutions</h2>
+    <p>We are a team of creative developers, designers and problem solvers passionate about technology. Our mission is to deliver high quality, reliable and innovative solutions that help our clients succeed in the digital world.</p>
+    <a href="about.html" class="btn btn-primary">Learn More About Us &rsaquo;</a>
+  </div>
+  <div class="about-img">
+    <img src="images/about-office.png" alt="CodeNexa Solutions office">
+  </div>
+</section>
+
+<section class="values">
+  <div class="value-card">
+    <div class="vicon">&#128640;</div>
+    <h4>Innovation</h4>
+    <p>We use the latest technologies.</p>
+  </div>
+  <div class="value-card">
+    <div class="vicon">&#128737;&#65039;</div>
+    <h4>Quality</h4>
+    <p>We deliver top quality solutions.</p>
+  </div>
+  <div class="value-card">
+    <div class="vicon">&#129309;</div>
+    <h4>Reliability</h4>
+    <p>We are always dependable.</p>
+  </div>
+  <div class="value-card">
+    <div class="vicon">&#128101;</div>
+    <h4>Customer Focus</h4>
+    <p>Your success is our priority.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  &copy; 2026 CodeNexa Solutions. All rights reserved. &nbsp;|&nbsp; <a href="mailto:info@codenexasolutions.com">info@codenexasolutions.com</a>
+</footer>
+
+</body>
+</html>

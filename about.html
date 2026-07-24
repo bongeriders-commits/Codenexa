@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | CodeNexa Solutions</title>
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- Header ---------- */
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:14px 48px;
+    background:var(--white);
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:46px;width:auto;}
+  .logo-text{line-height:1.1;}
+  .logo-text .brand{font-size:20px;font-weight:800;letter-spacing:1px;color:var(--navy);}
+  .logo-text .brand span{color:var(--blue-bright);}
+  .logo-text .tagline{font-size:9px;letter-spacing:2px;color:var(--gray-text);font-weight:600;}
+  nav ul{display:flex;gap:32px;align-items:center;}
+  nav a{
+    font-size:15px;font-weight:500;color:#2a3242;
+    padding-bottom:4px;border-bottom:2px solid transparent;transition:.2s;
+  }
+  nav a.active, nav a:hover{color:var(--blue);border-bottom-color:var(--blue);}
+  .btn{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:11px 22px;border-radius:6px;font-weight:600;font-size:14.5px;
+    cursor:pointer;transition:.2s;border:2px solid transparent;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-light{background:#fff;color:var(--blue);}
+  .btn-light:hover{filter:brightness(0.97);}
+
+  /* ---------- About hero ---------- */
+  .about-hero{
+    background:radial-gradient(ellipse at 75% 30%, #10275a 0%, var(--navy-deep) 55%, #050b1a 100%);
+    color:#fff;
+    padding:70px 48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+  }
+  .about-hero .eyebrow{color:var(--blue-bright);font-size:13px;font-weight:700;letter-spacing:2px;margin-bottom:16px;}
+  .about-hero h1{font-size:40px;font-weight:800;line-height:1.2;margin-bottom:20px;}
+  .about-hero h1 span{color:var(--blue-bright);}
+  .about-hero p{font-size:15.5px;color:#c3cbe0;max-width:520px;}
+  .about-hero-img{border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
+
+  /* ---------- Mission / Vision ---------- */
+  .mv-section{
+    padding:70px 48px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    background:var(--light-bg);
+  }
+  .mv-card{
+    background:#fff;
+    border-left:4px solid var(--blue);
+    border-radius:8px;
+    padding:32px;
+    box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .mv-icon{
+    width:52px;height:52px;border-radius:50%;
+    background:var(--blue);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin-bottom:16px;
+  }
+  .mv-card .label{color:var(--blue);font-weight:700;font-size:12.5px;letter-spacing:1.5px;margin-bottom:6px;}
+  .mv-card h3{font-size:22px;color:var(--navy);margin-bottom:12px;}
+  .mv-card p{color:var(--gray-text);font-size:14.5px;}
+
+  /* ---------- Core values ---------- */
+  .values-section{padding:70px 48px;text-align:center;}
+  .values-section .heading{
+    color:var(--blue);font-weight:700;font-size:13px;letter-spacing:2px;
+    margin-bottom:40px;position:relative;
+  }
+  .values-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:20px;
+  }
+  .value-item .vicon{
+    width:64px;height:64px;border-radius:50%;
+    background:#eaf1fd;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;margin:0 auto 14px;
+  }
+  .value-item h4{font-size:13.5px;letter-spacing:.5px;color:var(--navy);margin-bottom:8px;}
+  .value-item p{font-size:12.5px;color:var(--gray-text);}
+
+  /* ---------- Why choose us ---------- */
+  .why-section{
+    padding:70px 48px;
+    background:var(--light-bg);
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+    gap:50px;
+    align-items:center;
+  }
+  .why-section h2{font-size:26px;color:var(--navy);font-weight:800;margin-bottom:20px;}
+  .why-list li{
+    position:relative;padding-left:30px;margin-bottom:14px;
+    font-size:14.5px;color:#2a3242;
+  }
+  .why-list li::before{
+    content:"\2713";
+    position:absolute;left:0;top:0;
+    width:20px;height:20px;border-radius:5px;
+    background:var(--blue);color:#fff;
+    font-size:12px;display:flex;align-items:center;justify-content:center;
+  }
+  .quote-block{
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    box-shadow:0 20px 50px rgba(10,26,60,0.2);
+  }
+  .quote-block img{height:100%;object-fit:cover;}
+  .quote-copy{
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;padding:34px 28px;
+  }
+  .quote-copy .mark{font-size:34px;font-weight:800;opacity:.7;margin-bottom:6px;}
+  .quote-copy h3{font-size:20px;font-weight:700;margin-bottom:16px;line-height:1.3;}
+  .quote-copy p{font-size:13.5px;color:#dfeaff;}
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    background:linear-gradient(90deg,var(--navy-deep),var(--navy));
+    color:#fff;
+    padding:36px 48px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+  }
+  .cta-left{display:flex;align-items:center;gap:20px;}
+  .cta-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:#fff;color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:22px;flex:none;
+  }
+  .cta-left h3{font-size:19px;margin-bottom:4px;}
+  .cta-left p{font-size:13.5px;color:#c3cbe0;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--navy-deep);color:#aeb6cc;padding:50px 48px 20px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:30px;
+    padding-bottom:30px;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col h4{color:#fff;font-size:14px;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-col ul li{margin-bottom:10px;font-size:13.5px;}
+  .footer-col ul li a:hover{color:var(--blue-bright);}
+  .footer-col .contact-line{display:flex;gap:10px;margin-bottom:12px;font-size:13.5px;}
+  .socials{display:flex;gap:10px;margin-top:16px;}
+  .socials a{
+    width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+  }
+  .footer-bottom{
+    display:flex;justify-content:space-between;
+    padding-top:20px;font-size:12.5px;
+  }
+  .footer-bottom .brand-mini span{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{display:none;}
+    .about-hero,.mv-section,.why-section{grid-template-columns:1fr;padding:50px 24px;}
+    .values-grid{grid-template-columns:repeat(2,1fr);}
+    .quote-block{grid-template-columns:1fr;}
+    .quote-block img{height:220px;}
+    .cta-banner{flex-direction:column;text-align:center;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="index.html#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="index.html#contact" class="btn btn-primary">Get a Quote &rsaquo;</a>
+</header>
+
+<section class="about-hero">
+  <div>
+    <div class="eyebrow">ABOUT US</div>
+    <h1>About CODENEXA <span>Solutions</span></h1>
+    <p>At CodeNexa Solutions, we turn ideas into powerful digital solutions. We are a team of passionate developers, designers and problem solvers committed to delivering innovative, reliable and user-friendly software that helps businesses grow and achieve their goals.</p>
+  </div>
+  <div class="about-hero-img">
+    <img src="images/about-office.png" alt="CodeNexa Solutions office">
+  </div>
+</section>
+
+<section class="mv-section">
+  <div class="mv-card">
+    <div class="mv-icon">&#127919;</div>
+    <div class="label">OUR MISSION</div>
+    <h3>Empowering Businesses Through Technology</h3>
+    <p>To design and develop reliable, scalable and innovative software solutions that enable businesses and organizations to achieve their goals through technology.</p>
+  </div>
+  <div class="mv-card">
+    <div class="mv-icon">&#128065;</div>
+    <div class="label">OUR VISION</div>
+    <h3>To Be a Leading Technology Solutions Company</h3>
+    <p>To become one of Africa's leading technology companies, recognized for innovation, excellence and delivering world-class digital solutions.</p>
+  </div>
+</section>
+
+<section class="values-section">
+  <div class="heading">&mdash;&nbsp; OUR CORE VALUES &nbsp;&mdash;</div>
+  <div class="values-grid">
+    <div class="value-item">
+      <div class="vicon">&#128161;</div>
+      <h4>INNOVATION</h4>
+      <p>We embrace creativity and use the latest technologies to build smarter solutions.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#128737;&#65039;</div>
+      <h4>INTEGRITY</h4>
+      <p>We are honest, transparent and committed to doing the right things.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#127942;</div>
+      <h4>EXCELLENCE</h4>
+      <p>We strive for the highest quality in every project we deliver.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#128101;</div>
+      <h4>CUSTOMER FIRST</h4>
+      <p>Our clients are at the heart of everything we do. Your success is our priority.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#129309;</div>
+      <h4>RELIABILITY</h4>
+      <p>We deliver on our promises and build trust through dependable solutions.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#128214;</div>
+      <h4>CONTINUOUS LEARNING</h4>
+      <p>We keep learning and improving to stay ahead in a fast-changing world.</p>
+    </div>
+    <div class="value-item">
+      <div class="vicon">&#128101;</div>
+      <h4>TEAMWORK</h4>
+      <p>We believe in collaboration and the power of teamwork.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why-section" id="why-us">
+  <div>
+    <h2>WHY CHOOSE US?</h2>
+    <ul class="why-list">
+      <li>Custom solutions that fit your unique requirements</li>
+      <li>Modern, responsive and user-friendly designs</li>
+      <li>Fast turnaround and on-time delivery</li>
+      <li>Affordable pricing for all business sizes</li>
+      <li>Secure, scalable and high-performance systems</li>
+      <li>Dedicated support 24/7</li>
+      <li>Commitment to quality and customer satisfaction</li>
+    </ul>
+  </div>
+  <div class="quote-block">
+    <img src="images/img4_webdev.png" alt="Code on screen">
+    <div class="quote-copy">
+      <div class="mark">&ldquo;</div>
+      <h3>We don't just write code. We build solutions that make an impact.</h3>
+      <p>At CodeNexa Solutions, we code your vision and bring it to life.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-left">
+    <div class="cta-icon">&#128101;</div>
+    <div>
+      <h3>Let's Build Something Great Together</h3>
+      <p>Have a project in mind? Let's discuss how we can help you turn your vision into reality.</p>
+    </div>
+  </div>
+  <a href="index.html#contact" class="btn btn-light">Get In Touch &rsaquo;</a>
+</section>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-wrap" style="margin-bottom:14px;">
+        <img src="images/logo.png" alt="CodeNexa Solutions logo" style="height:38px;">
+        <div class="logo-text">
+          <div class="brand" style="color:#fff;font-size:16px;">CODE<span>NEXA</span></div>
+          <div class="tagline">SOLUTIONS</div>
+        </div>
+      </div>
+      <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
+      <div class="socials">
+        <a href="#">f</a><a href="#">t</a><a href="#">in</a><a href="#">ig</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#why-us">Why Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>OUR SERVICES</h4>
+      <ul>
+        <li>Web Development</li>
+        <li>Mobile Apps</li>
+        <li>POS Systems</li>
+        <li>Business Software</li>
+        <li>Cloud Solutions</li>
+        <li>UI/UX Design</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <div class="contact-line">&#128222; info@codenexasolutions.com</div>
+      <div class="contact-line">&#9993;&#65039; info@codenexasolutions.com</div>
+      <div class="contact-line">&#128205; Kenya</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 CodeNexa Solutions. All rights reserved.</div>
+    <div class="brand-mini">We <span>Code</span> Your Vision</div>
+  </div>
+</footer>
+
+</body>
+</html>
