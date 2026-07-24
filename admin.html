@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Admin | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+    --green:#1f9d55;
+    --red:#d94040;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    background:var(--light-bg);
+    line-height:1.5;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* ---------- Login screen ---------- */
+  .login-wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+  }
+  .login-card{
+    background:var(--white);
+    padding:40px 32px;
+    border-radius:12px;
+    box-shadow:0 12px 40px rgba(10,26,60,0.12);
+    max-width:360px;
+    width:100%;
+    text-align:center;
+  }
+  .login-card h1{font-size:20px;color:var(--navy);margin-bottom:6px;}
+  .login-card p{font-size:13.5px;color:var(--gray-text);margin-bottom:22px;}
+  .login-card input{
+    width:100%;
+    padding:12px 14px;
+    border:1.5px solid #dbe1ea;
+    border-radius:8px;
+    font-size:14.5px;
+    margin-bottom:14px;
+  }
+  .login-card input:focus{outline:none;border-color:var(--blue);}
+  .login-card button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));
+    color:#fff;
+    font-weight:600;
+    font-size:14.5px;
+    cursor:pointer;
+  }
+  .login-card button:disabled{opacity:.6;cursor:default;}
+  .login-error{color:var(--red);font-size:13px;margin-top:12px;display:none;}
+  .login-error.show{display:block;}
+
+  /* ---------- Dashboard ---------- */
+  .dash{display:none;}
+  .dash.show{display:block;}
+  header{
+    background:var(--navy);
+    color:#fff;
+    padding:16px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  header h1{font-size:17px;font-weight:700;}
+  header .logout-btn{
+    background:rgba(255,255,255,0.12);
+    border:none;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:6px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .tabs{
+    display:flex;
+    gap:6px;
+    padding:16px 24px 0;
+    flex-wrap:wrap;
+  }
+  .tab-btn{
+    padding:10px 16px;
+    border:1.5px solid #dbe1ea;
+    background:#fff;
+    border-radius:8px 8px 0 0;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--gray-text);
+    cursor:pointer;
+  }
+  .tab-btn.active{color:var(--blue);border-color:var(--blue);border-bottom-color:#fff;}
+  .tab-count{
+    display:inline-block;
+    background:var(--light-bg);
+    border-radius:10px;
+    padding:1px 7px;
+    font-size:11.5px;
+    margin-left:5px;
+  }
+  .panel{padding:0 24px 40px;}
+  .panel-inner{background:#fff;border-radius:0 8px 8px 8px;box-shadow:0 4px 16px rgba(10,26,60,0.06);overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:640px;}
+  th{
+    text-align:left;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:var(--gray-text);
+    padding:14px 16px;
+    border-bottom:1px solid #eef0f4;
+    white-space:nowrap;
+  }
+  td{
+    padding:14px 16px;
+    border-bottom:1px solid #eef0f4;
+    font-size:13.5px;
+    vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  .msg-cell{max-width:280px;white-space:pre-wrap;color:var(--gray-text);}
+  .status-badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:12px;
+    font-size:11.5px;
+    font-weight:700;
+  }
+  .status-badge.new{background:#e8f0ff;color:var(--blue);}
+  .status-badge.done{background:#e7f7ee;color:var(--green);}
+  .mark-btn{
+    background:transparent;
+    border:1.5px solid #dbe1ea;
+    border-radius:6px;
+    padding:6px 12px;
+    font-size:12.5px;
+    cursor:pointer;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  .mark-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .empty-row td{text-align:center;color:var(--gray-text);padding:36px;}
+  .refresh-btn{
+    background:transparent;
+    border:1.5px solid rgba(255,255,255,0.3);
+    color:#fff;
+    border-radius:6px;
+    padding:8px 14px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .header-actions{display:flex;gap:8px;}
+
+  @media(max-width:700px){
+    header{padding:14px 16px;}
+    .tabs{padding:14px 16px 0;}
+    .panel{padding:0 16px 30px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="login-wrap" id="loginScreen">
+  <div class="login-card">
+    <h1>CodeNexa Admin</h1>
+    <p>Enter the admin password to view website leads.</p>
+    <form id="loginForm">
+      <input type="password" id="loginPassword" placeholder="Password" required autofocus>
+      <button type="submit" id="loginBtn">Log In</button>
+    </form>
+    <div class="login-error" id="loginError"><i class="fa-solid fa-circle-exclamation"></i> Incorrect password.</div>
+  </div>
+</div>
+
+<div class="dash" id="dashboard">
+  <header>
+    <h1><i class="fa-solid fa-inbox"></i>&nbsp; CodeNexa Leads</h1>
+    <div class="header-actions">
+      <button class="refresh-btn" id="refreshBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+      <button class="logout-btn" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Log Out</button>
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="contact_messages">Contact <span class="tab-count" id="count-contact_messages">0</span></button>
+    <button class="tab-btn" data-tab="quote_requests">Quotes <span class="tab-count" id="count-quote_requests">0</span></button>
+    <button class="tab-btn" data-tab="callback_requests">Callbacks <span class="tab-count" id="count-callback_requests">0</span></button>
+    <button class="tab-btn" data-tab="newsletter_subscribers">Subscribers <span class="tab-count" id="count-newsletter_subscribers">0</span></button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-inner">
+      <table id="dataTable">
+        <thead id="tableHead"></thead>
+        <tbody id="tableBody">
+          <tr class="empty-row"><td colspan="6">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentTab = 'contact_messages';
+  let allData = {};
+
+  const COLUMNS = {
+    contact_messages: [
+      { key: 'submittedAt', label: 'Date', fmt: fmtDate },
+      { key: 'name', label: 'Name' },
+      { key: 'phone', label: 'Phone' },
+      { key: 'email', label: 'Email' },
+      { key: 'subject', label: 'Subject' },
+      { key: 'message', label: 'Message', cls: 'msg-cell' },
+      { key: 'status', label: 'Status', fmt: fmtStatus },
+      { key: '_action', label: '' },
+    ],
+    quote_requests: [
+      { key: 'submittedAt', label: 'Date', fmt: fmtDate },
+      { key: 'plan', label: 'Plan' },
+      { key: 'phone', label: 'Phone' },
+      { key: 'email', label: 'Email' },
+      { key: 'details', label: 'Details', cls: 'msg-cell' },
+      { key: 'status', label: 'Status', fmt: fmtStatus },
+      { key: '_action', label: '' },
+    ],
+    callback_requests: [
+      { key: 'submittedAt', label: 'Date', fmt: fmtDate },
+      { key: 'phone', label: 'Phone' },
+      { key: 'status', label: 'Status', fmt: fmtStatus },
+      { key: '_action', label: '' },
+    ],
+    newsletter_subscribers: [
+      { key: 'subscribedAt', label: 'Subscribed', fmt: fmtDate },
+      { key: 'email', label: 'Email' },
+    ],
+  };
+
+  function fmtDate(v){
+    if(!v) return '—';
+    const d = new Date(v);
+    return isNaN(d) ? v : d.toLocaleString('en-KE', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+  function fmtStatus(v){
+    const s = v || 'new';
+    return `<span class="status-badge ${s}">${s}</span>`;
+  }
+  function esc(v){
+    return String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  }
+
+  // ---------- Login ----------
+  document.getElementById('loginForm').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    const err = document.getElementById('loginError');
+    const password = document.getElementById('loginPassword').value;
+    btn.disabled = true;
+    err.classList.remove('show');
+
+    try{
+      const res = await fetch('/api/admin-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if(res.ok && data.ok){
+        showDashboard();
+      }else{
+        err.classList.add('show');
+      }
+    }catch(e2){
+      err.classList.add('show');
+    }finally{
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async function(){
+    await fetch('/api/admin-logout', { method: 'POST' });
+    document.getElementById('dashboard').classList.remove('show');
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('loginPassword').value = '';
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', loadData);
+
+  document.getElementById('tabs').addEventListener('click', function(e){
+    const btn = e.target.closest('.tab-btn');
+    if(!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    renderTable();
+  });
+
+  function showDashboard(){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').classList.add('show');
+    loadData();
+  }
+
+  async function loadData(){
+    try{
+      const res = await fetch('/api/admin-data');
+      const data = await res.json();
+      if(res.status === 401){
+        document.getElementById('dashboard').classList.remove('show');
+        document.getElementById('loginScreen').style.display = 'flex';
+        return;
+      }
+      if(!res.ok || !data.ok) throw new Error(data.error || 'Failed to load');
+      allData = data.data;
+      Object.keys(allData).forEach(k => {
+        const el = document.getElementById('count-' + k);
+        if(el) el.textContent = allData[k].length;
+      });
+      renderTable();
+    }catch(err){
+      console.error('Failed to load admin data:', err);
+      document.getElementById('tableBody').innerHTML = '<tr class="empty-row"><td colspan="6">Failed to load data. Try refreshing.</td></tr>';
+    }
+  }
+
+  function renderTable(){
+    const cols = COLUMNS[currentTab];
+    const rows = allData[currentTab] || [];
+
+    document.getElementById('tableHead').innerHTML =
+      '<tr>' + cols.map(c => `<th>${esc(c.label)}</th>`).join('') + '</tr>';
+
+    if(!rows.length){
+      document.getElementById('tableBody').innerHTML =
+        `<tr class="empty-row"><td colspan="${cols.length}">No entries yet.</td></tr>`;
+      return;
+    }
+
+    document.getElementById('tableBody').innerHTML = rows.map(row => {
+      return '<tr>' + cols.map(c => {
+        if(c.key === '_action'){
+          const nextStatus = row.status === 'done' ? 'new' : 'done';
+          return `<td><button class="mark-btn" data-id="${esc(row.id)}" data-collection="${currentTab}" data-status="${nextStatus}">Mark as ${nextStatus}</button></td>`;
+        }
+        const raw = row[c.key];
+        const val = c.fmt ? c.fmt(raw) : esc(raw || '—');
+        return `<td class="${c.cls || ''}">${val}</td>`;
+      }).join('') + '</tr>';
+    }).join('');
+  }
+
+  document.getElementById('tableBody').addEventListener('click', async function(e){
+    const btn = e.target.closest('.mark-btn');
+    if(!btn) return;
+    btn.disabled = true;
+    const { id, collection, status } = btn.dataset;
+    try{
+      const res = await fetch('/api/admin-update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, collection, status })
+      });
+      const data = await res.json();
+      if(res.ok && data.ok){
+        const item = allData[collection].find(r => r.id === id);
+        if(item) item.status = status;
+        renderTable();
+      }
+    }catch(err){
+      console.error('Failed to update status:', err);
+    }finally{
+      btn.disabled = false;
+    }
+  });
+
+  // If already logged in (valid cookie), skip straight to dashboard.
+  (async function checkSession(){
+    try{
+      const res = await fetch('/api/admin-data');
+      if(res.ok) showDashboard();
+    }catch(e){ /* not logged in — show login screen */ }
+  })();
+</script>
+
+</body>
+</html>

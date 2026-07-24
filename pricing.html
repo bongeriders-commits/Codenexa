@@ -702,6 +702,7 @@
       <span class="modal-plan-tag" id="quoteModalPlanTag"><i class="fa-solid fa-tag"></i> Basic Plan</span>
 
       <form id="quoteForm" novalidate>
+        <input type="text" name="website" id="quoteWebsite" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <div class="field-group">
           <label for="quotePhone">Phone Number <span class="opt">(required)</span></label>
           <div class="field-input-wrap">
@@ -733,6 +734,7 @@
       <div class="callback-panel" id="callbackPanel">
         <p>Leave your number and one of our team will call you back.</p>
         <form id="callbackForm" novalidate>
+          <input type="text" name="website" id="callbackWebsite" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
           <div class="field-group">
             <label for="callbackPhone">Phone Number <span class="opt">(required)</span></label>
             <div class="field-input-wrap">
@@ -800,9 +802,11 @@
 
   quoteForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = quoteForm.querySelector('button[type="submit"]');
     const phone = document.getElementById('quotePhone').value.trim();
     const email = document.getElementById('quoteEmail').value.trim();
     const details = document.getElementById('quoteDetails').value.trim();
+    const website = document.getElementById('quoteWebsite').value;
     const plan = quoteModalPlanTag.textContent.replace('Plan','').trim();
 
     if(!phone || !email){
@@ -810,32 +814,63 @@
       return;
     }
 
-    // No backend yet — hand the request to the visitor's email app, addressed to us.
-    const bodyLines = ['Plan: ' + plan, 'Phone: ' + phone, 'Email: ' + email, '', details];
-    const mailtoLink = 'mailto:zgichmwa@gmail.com'
-      + '?subject=' + encodeURIComponent('Quote Request: ' + plan + ' Plan')
-      + '&body=' + encodeURIComponent(bodyLines.join('\n'));
-    window.location.href = mailtoLink;
+    if(submitBtn) submitBtn.disabled = true;
 
-    showStatus(quoteStatus, 'success', 'Opening your email app to send this to us — please hit send there to complete it.');
-    quoteForm.reset();
+    try{
+      const res = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ plan, phone, email, details, website })
+      });
+      const data = await res.json();
+
+      if(res.ok && data.ok){
+        showStatus(quoteStatus, 'success', 'Thank you! Your request has been received — we\'ll be in touch shortly.');
+        quoteForm.reset();
+      }else{
+        throw new Error(data.error || 'Request failed');
+      }
+    }catch(err){
+      console.error('Quote form error:', err);
+      showStatus(quoteStatus, 'error', 'Something went wrong sending your request. Please try again or WhatsApp us directly.');
+    }finally{
+      if(submitBtn) submitBtn.disabled = false;
+    }
   });
 
   callbackForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = callbackForm.querySelector('button[type="submit"]');
     const phone = document.getElementById('callbackPhone').value.trim();
+    const website = document.getElementById('callbackWebsite').value;
 
     if(!phone){
       showStatus(callbackStatus, 'error', 'Please enter a phone number.');
       return;
     }
 
-    // No backend yet — hand the request off via WhatsApp so we see it immediately.
-    const waMessage = 'Hi CodeNexa, please call me back. My number is ' + phone + '.';
-    window.open('https://wa.me/254725672771?text=' + encodeURIComponent(waMessage), '_blank');
+    if(submitBtn) submitBtn.disabled = true;
 
-    showStatus(callbackStatus, 'success', 'Opening WhatsApp to send us your callback request.');
-    callbackForm.reset();
+    try{
+      const res = await fetch('/api/callback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, website })
+      });
+      const data = await res.json();
+
+      if(res.ok && data.ok){
+        showStatus(callbackStatus, 'success', 'Got it! We\'ll call you back soon.');
+        callbackForm.reset();
+      }else{
+        throw new Error(data.error || 'Request failed');
+      }
+    }catch(err){
+      console.error('Callback form error:', err);
+      showStatus(callbackStatus, 'error', 'Something went wrong. Please try again or WhatsApp us directly.');
+    }finally{
+      if(submitBtn) submitBtn.disabled = false;
+    }
   });
 </script>
 

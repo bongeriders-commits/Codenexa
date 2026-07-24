@@ -479,10 +479,11 @@
       <h4>Subscribe to Our Blog</h4>
       <p>Get the latest articles and updates delivered straight to your inbox.</p>
       <form id="subscribeForm">
+        <input type="text" name="website" id="subscribeWebsite" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
         <input type="email" id="subscribeEmail" placeholder="Enter your email" required>
         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
       </form>
-      <div class="subscribe-status" id="subscribeStatus"><i class="fa-solid fa-circle-check"></i> Opening your email app — please hit send to confirm your subscription.</div>
+      <div class="subscribe-status" id="subscribeStatus"><i class="fa-solid fa-circle-check"></i> Thanks for subscribing!</div>
     </div>
   </aside>
 </div>
@@ -566,17 +567,35 @@
     });
   });
 
-  document.getElementById('subscribeForm').addEventListener('submit', function(e){
+  document.getElementById('subscribeForm').addEventListener('submit', async function(e){
     e.preventDefault();
+    const submitBtn = this.querySelector('button[type="submit"]');
     const status = document.getElementById('subscribeStatus');
     const subEmail = document.getElementById('subscribeEmail').value.trim();
-    // No newsletter tool set up yet — hand the address to us via email so it isn't lost.
-    const mailtoLink = 'mailto:zgichmwa@gmail.com'
-      + '?subject=' + encodeURIComponent('Blog Subscription Request')
-      + '&body=' + encodeURIComponent('Please add this email to the blog subscriber list: ' + subEmail);
-    window.location.href = mailtoLink;
-    status.classList.add('show');
-    this.reset();
+    const website = document.getElementById('subscribeWebsite').value;
+
+    if(submitBtn) submitBtn.disabled = true;
+
+    try{
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: subEmail, website })
+      });
+      const data = await res.json();
+
+      if(res.ok && data.ok){
+        status.classList.add('show');
+        this.reset();
+      }else{
+        throw new Error(data.error || 'Request failed');
+      }
+    }catch(err){
+      console.error('Subscribe form error:', err);
+      alert('Something went wrong subscribing. Please try again.');
+    }finally{
+      if(submitBtn) submitBtn.disabled = false;
+    }
   });
 </script>
 
