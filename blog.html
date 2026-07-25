@@ -187,6 +187,7 @@
   .pagination button.active{background:var(--blue);border-color:var(--blue);color:#fff;cursor:default;}
   .pagination button[disabled]{cursor:default;opacity:.5;}
   .pagination span.dots{border:none;background:transparent;cursor:default;}
+  .results-count{text-align:center;font-size:12.5px;color:var(--gray-text);margin-top:10px;}
 
   /* ---------- Sidebar ---------- */
   .sidebar-card{
@@ -197,16 +198,22 @@
   .cat-row{
     display:flex;align-items:center;justify-content:space-between;
     padding:10px 0;border-bottom:1px solid #eef1f6;font-size:13.5px;color:#2a3242;
+    cursor:pointer;transition:.15s;background:none;border-left:none;border-right:none;border-top:none;width:100%;text-align:left;font-family:inherit;
   }
   .cat-row:last-child{border-bottom:none;}
+  .cat-row:hover{color:var(--blue);}
+  .cat-row.active{color:var(--blue);}
+  .cat-row.active .cat-name i{color:var(--blue);}
+  .cat-row.active .cat-count{background:var(--blue);color:#fff;}
   .cat-row .cat-name{display:flex;align-items:center;gap:10px;}
   .cat-row .cat-name i{color:var(--blue);width:16px;text-align:center;}
   .cat-row .cat-count{
     background:var(--light-bg);color:var(--gray-text);font-size:11.5px;font-weight:700;
     padding:2px 9px;border-radius:12px;
   }
-  .pop-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eef1f6;}
+  .pop-row{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eef1f6;cursor:pointer;transition:.15s;}
   .pop-row:last-child{border-bottom:none;}
+  .pop-row:hover h5{color:var(--blue);}
   .pop-thumb{
     width:52px;height:52px;border-radius:8px;flex:none;
     position:relative;overflow:hidden;
@@ -396,7 +403,7 @@
 
     <div class="articles-grid">
 
-      <article class="article-card">
+      <article class="article-card" data-category="Web Development">
         <div class="article-thumb"><img src="images/blog-1-code-editor.png" alt="10 Essential Features Every Business Website Must Have" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">Web Development</div>
@@ -404,12 +411,12 @@
           <p>Discover the must-have features that make your website professional, user-friendly and effective.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 24, 2026, 3:55 PM &nbsp;&middot;&nbsp; 7 min read</span>
-            <a href="#" class="read-more" id="readMoreArticle1">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle1" data-article="1">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
 
-      <article class="article-card">
+      <article class="article-card" data-category="Design">
         <div class="article-thumb"><img src="images/blog-2-uiux.png" alt="UI/UX Best Practices for Better User Experience" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">Design</div>
@@ -417,12 +424,12 @@
           <p>Good design is more than looks. Learn the best practices that create amazing user experiences.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 18, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle2" data-article="2">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
 
-      <article class="article-card">
+      <article class="article-card" data-category="POS Systems">
         <div class="article-thumb"><img src="images/blog-3-pos.png" alt="How POS Systems Can Transform Your Business" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">POS Systems</div>
@@ -430,12 +437,12 @@
           <p>Explore the benefits of using a POS system to streamline operations and increase profits.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 10, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle3" data-article="3">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
 
-      <article class="article-card">
+      <article class="article-card" data-category="Cloud Solutions">
         <div class="article-thumb"><img src="images/blog-4-cloud.png" alt="Cloud Solutions article thumbnail" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">Cloud Solutions</div>
@@ -443,12 +450,12 @@
           <p>The cloud is the future. See how cloud solutions can reduce costs and improve efficiency.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jul 2, 2026 &nbsp;&middot;&nbsp; 4 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle4" data-article="4">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
 
-      <article class="article-card">
+      <article class="article-card" data-category="Mobile Development">
         <div class="article-thumb"><img src="images/blog-5-mobile.png" alt="Mobile Development article thumbnail" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">Mobile Development</div>
@@ -456,12 +463,12 @@
           <p>Stay ahead of the game with these top mobile app development trends to watch this year.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jun 24, 2026 &nbsp;&middot;&nbsp; 5 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle5" data-article="5">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
 
-      <article class="article-card">
+      <article class="article-card" data-category="Cybersecurity">
         <div class="article-thumb"><img src="images/blog-6-cybersecurity.png" alt="Cybersecurity article thumbnail" loading="lazy"></div>
         <div class="article-body">
           <div class="article-tag">Cybersecurity</div>
@@ -469,7 +476,7 @@
           <p>Protect your business and customer data with these practical cybersecurity best practices.</p>
           <div class="article-meta">
             <span class="meta-left"><i class="fa-regular fa-calendar"></i>Jun 15, 2026 &nbsp;&middot;&nbsp; 6 min read</span>
-            <a href="#" class="read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#" class="read-more" id="readMoreArticle6" data-article="6">Read More <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
       </article>
@@ -479,51 +486,47 @@
     <div class="pagination">
       <button type="button" disabled aria-label="Previous page"><i class="fa-solid fa-chevron-left"></i></button>
       <button type="button" class="active">1</button>
-      <button type="button">2</button>
-      <button type="button">3</button>
-      <span class="dots">&hellip;</span>
-      <button type="button">8</button>
-      <button type="button" aria-label="Next page"><i class="fa-solid fa-chevron-right"></i></button>
+      <button type="button" disabled aria-label="Next page"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
+    <p class="results-count" id="resultsCount">Showing 6 of 6 articles</p>
   </div>
 
   <aside class="sidebar">
     <div class="sidebar-card">
       <h4>Categories</h4>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-laptop-code"></i>Web Development</span><span class="cat-count">12</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-mobile-screen-button"></i>Mobile Development</span><span class="cat-count">10</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-palette"></i>Design &amp; UI/UX</span><span class="cat-count">8</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-cash-register"></i>POS Systems</span><span class="cat-count">7</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-cloud-arrow-up"></i>Cloud Solutions</span><span class="cat-count">6</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-shield-halved"></i>Cybersecurity</span><span class="cat-count">6</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-chart-line"></i>Business Tips</span><span class="cat-count">5</span></div>
-      <div class="cat-row"><span class="cat-name"><i class="fa-solid fa-microchip"></i>Technology</span><span class="cat-count">9</span></div>
+      <button type="button" class="cat-row active" data-category="all"><span class="cat-name"><i class="fa-solid fa-layer-group"></i>All Articles</span><span class="cat-count">6</span></button>
+      <button type="button" class="cat-row" data-category="Web Development"><span class="cat-name"><i class="fa-solid fa-laptop-code"></i>Web Development</span><span class="cat-count">1</span></button>
+      <button type="button" class="cat-row" data-category="Design"><span class="cat-name"><i class="fa-solid fa-palette"></i>Design &amp; UI/UX</span><span class="cat-count">1</span></button>
+      <button type="button" class="cat-row" data-category="POS Systems"><span class="cat-name"><i class="fa-solid fa-cash-register"></i>POS Systems</span><span class="cat-count">1</span></button>
+      <button type="button" class="cat-row" data-category="Cloud Solutions"><span class="cat-name"><i class="fa-solid fa-cloud-arrow-up"></i>Cloud Solutions</span><span class="cat-count">1</span></button>
+      <button type="button" class="cat-row" data-category="Mobile Development"><span class="cat-name"><i class="fa-solid fa-mobile-screen-button"></i>Mobile Development</span><span class="cat-count">1</span></button>
+      <button type="button" class="cat-row" data-category="Cybersecurity"><span class="cat-name"><i class="fa-solid fa-shield-halved"></i>Cybersecurity</span><span class="cat-count">1</span></button>
     </div>
 
     <div class="sidebar-card">
       <h4>Popular Posts</h4>
-      <div class="pop-row">
+      <div class="pop-row" data-article="1">
         <div class="pop-thumb"><i class="fa-solid fa-laptop-code"></i></div>
         <div>
           <h5>10 Essential Features Every Business Website Must Have</h5>
           <div class="pop-date">Jul 24, 2026</div>
         </div>
       </div>
-      <div class="pop-row">
+      <div class="pop-row" data-article="3">
         <div class="pop-thumb"><i class="fa-solid fa-cash-register"></i></div>
         <div>
           <h5>How POS Systems Can Transform Your Business</h5>
           <div class="pop-date">Jul 10, 2026</div>
         </div>
       </div>
-      <div class="pop-row">
+      <div class="pop-row" data-article="4">
         <div class="pop-thumb"><i class="fa-solid fa-cloud-arrow-up"></i></div>
         <div>
           <h5>Why Your Business Should Move to the Cloud</h5>
           <div class="pop-date">Jul 2, 2026</div>
         </div>
       </div>
-      <div class="pop-row">
+      <div class="pop-row" data-article="6">
         <div class="pop-thumb"><i class="fa-solid fa-lock"></i></div>
         <div>
           <h5>7 Tips to Keep Your Business Data Secure</h5>
@@ -563,16 +566,16 @@
   <div class="article-modal">
     <div class="article-modal-hero">
       <button class="article-modal-close" id="articleModalClose" aria-label="Close article"><i class="fa-solid fa-xmark"></i></button>
-      <img src="images/blog-1-code-editor.png" alt="10 Essential Features Every Business Website Must Have">
+      <img id="articleModalImg" src="images/blog-1-code-editor.png" alt="">
     </div>
     <div class="article-modal-body">
-      <div class="article-modal-tag">Web Development</div>
-      <h1>10 Essential Features Every Business Website Must Have</h1>
+      <div class="article-modal-tag" id="articleModalTag">Web Development</div>
+      <h1 id="articleModalTitle">10 Essential Features Every Business Website Must Have</h1>
       <div class="article-modal-meta">
-        <span><i class="fa-regular fa-calendar"></i>Jul 24, 2026, 3:55 PM</span>
-        <span><i class="fa-regular fa-clock"></i>7 min read</span>
+        <span><i class="fa-regular fa-calendar"></i><span id="articleModalDate">Jul 24, 2026, 3:55 PM</span></span>
+        <span><i class="fa-regular fa-clock"></i><span id="articleModalReadTime">7 min read</span></span>
       </div>
-      <div class="article-modal-content">
+      <div class="article-modal-content" id="articleModalContent">
         <p>In today's competitive digital economy, your website often serves as the first point of contact between your business and a potential customer. Before a prospect ever picks up the phone or walks through your door, they've already formed an opinion about your business based on your site. A poorly designed, slow, or confusing website doesn't just fail to impress &mdash; it actively costs you leads, sales, and credibility. Below, we break down the ten essential features that separate a professional, high-performing business website from one that quietly drives customers away.</p>
 
         <h2>1. Mobile-Responsive Design</h2>
@@ -677,13 +680,260 @@
     });
   });
 
+  var articleData = {
+    1: {
+      img: 'images/blog-1-code-editor.png',
+      tag: 'Web Development',
+      title: '10 Essential Features Every Business Website Must Have',
+      date: 'Jul 24, 2026, 3:55 PM',
+      readTime: '7 min read',
+      content: `
+        <p>In today's competitive digital economy, your website often serves as the first point of contact between your business and a potential customer. Before a prospect ever picks up the phone or walks through your door, they've already formed an opinion about your business based on your site. A poorly designed, slow, or confusing website doesn't just fail to impress &mdash; it actively costs you leads, sales, and credibility. Below, we break down the ten essential features that separate a professional, high-performing business website from one that quietly drives customers away.</p>
+
+        <h2>1. Mobile-Responsive Design</h2>
+        <p>More than half of global web traffic now originates from smartphones and tablets, and that share continues to grow year over year. A responsive website automatically adapts its layout, images, and navigation to fit any screen size, ensuring a seamless experience whether a visitor is on a desktop monitor or a mobile device. Businesses that neglect mobile optimization risk alienating the majority of their audience &mdash; and search engines like Google now prioritize mobile-friendly sites in their rankings, meaning poor responsiveness can hurt your visibility as well as your conversions.</p>
+
+        <h2>2. Fast Loading Speed</h2>
+        <p>Page speed is not a technical afterthought &mdash; it is a direct driver of business outcomes. Research consistently shows that a one-second delay in load time can significantly reduce conversion rates, and most visitors will abandon a page that takes longer than three seconds to load. Achieving fast performance requires attention to image compression, efficient code, reliable hosting infrastructure, and minimizing unnecessary scripts. In a marketplace where competitors are one click away, speed is a competitive advantage.</p>
+
+        <h2>3. Clear, Intuitive Navigation</h2>
+        <p>Visitors should never have to think twice about where to find information. A logical, well-structured navigation menu &mdash; typically featuring Home, About, Services, Portfolio, and Contact &mdash; allows users to move through your site efficiently and locate what they need without frustration. Confusing or cluttered navigation increases bounce rates and signals a lack of professionalism, while intuitive structure builds confidence and keeps visitors engaged longer.</p>
+
+        <h2>4. A Strong, Strategic Call to Action</h2>
+        <p>Every page on your website should have a clear purpose and guide the visitor toward a specific next step &mdash; requesting a quote, scheduling a consultation, or making a purchase. Calls to action should be visually distinct, strategically placed, and written with action-oriented language. A website without clear direction leaves visitors uncertain about how to engage further, resulting in missed opportunities even when interest is high.</p>
+
+        <h2>5. Professional, On-Brand Visual Design</h2>
+        <p>Your website's visual presentation communicates credibility before a single word is read. Consistent branding &mdash; including color palette, typography, imagery, and layout &mdash; reinforces trust and professionalism. Generic stock photography, mismatched design elements, or an outdated aesthetic can undermine even the strongest value proposition. Investing in cohesive, high-quality design signals to prospective clients that you invest the same care into your products or services.</p>
+
+        <h2>6. Accessible Contact Information</h2>
+        <p>Prospective clients should be able to reach your business within a click or two, regardless of which page they land on. This includes a visible phone number, email address, physical location where applicable, and a functional contact form. Businesses that bury or omit contact details create unnecessary friction, often losing leads who simply give up and turn to a competitor with clearer access.</p>
+
+        <h2>7. Search Engine Optimization (SEO) Fundamentals</h2>
+        <p>A well-designed website delivers little value if potential customers cannot find it. Foundational SEO practices &mdash; including optimized page titles, meta descriptions, image alt text, and clean URL structures &mdash; help search engines understand and index your content correctly. Strong SEO fundamentals drive sustainable, organic traffic over time, reducing long-term dependence on paid advertising and expanding your reach to customers actively searching for your services.</p>
+
+        <h2>8. Website Security (SSL/HTTPS)</h2>
+        <p>Security is no longer optional, even for businesses that don't process online payments. An SSL certificate, indicated by "https://" and a padlock icon in the browser bar, protects data transmitted through your site and reassures visitors that your business takes their privacy seriously. Modern browsers actively flag unsecured sites as "Not Secure," which can immediately erode trust, while search engines factor security into ranking algorithms &mdash; making it both a trust signal and an SEO consideration.</p>
+
+        <h2>9. Social Proof and Credibility Indicators</h2>
+        <p>Testimonials, client reviews, case studies, and recognizable client logos provide third-party validation that your business delivers on its promises. Social proof addresses a fundamental psychological barrier to purchasing decisions: uncertainty. When prospective customers see evidence that others have had positive experiences with your business, hesitation gives way to confidence, often accelerating the decision-making process.</p>
+
+        <h2>10. Manageable, Scalable Content Infrastructure</h2>
+        <p>A business website should be easy to maintain and update over time &mdash; whether that means publishing new blog content, adjusting pricing, or introducing new team members and services. A well-structured content management approach eliminates the need for constant developer involvement, allowing your business to keep information current and respond quickly to market changes without operational bottlenecks.</p>
+
+        <h2>Conclusion</h2>
+        <p>A business website is far more than a digital placeholder &mdash; it is a strategic asset that actively works to build trust, answer customer questions, and convert interest into revenue. By ensuring your site incorporates these ten foundational elements, you position your business for stronger engagement, improved credibility, and measurable growth in an increasingly digital-first marketplace.</p>
+      `
+    },
+    2: {
+      img: 'images/blog-2-uiux.png',
+      tag: 'Design',
+      title: 'UI/UX Best Practices for Better User Experience',
+      date: 'Jul 18, 2026',
+      readTime: '4 min read',
+      content: `
+        <p>Good design is often mistaken for decoration &mdash; a matter of color palettes and pretty icons. In reality, UI (user interface) and UX (user experience) design are about removing friction. Every screen, button, and form field either helps a person accomplish their goal or gets in their way. The businesses that understand this difference consistently outperform competitors who treat design as an afterthought, because usability directly shapes whether a visitor converts into a customer or quietly leaves.</p>
+
+        <h2>1. Design for Clarity, Not Cleverness</h2>
+        <p>A clever interface that requires explanation has already failed. Icons, labels, and layouts should communicate their purpose instantly, without the user needing to guess or hover to find out what something does. When in doubt, favor the familiar pattern over the novel one &mdash; users move faster through interfaces that behave the way they expect.</p>
+
+        <h2>2. Maintain Visual Hierarchy</h2>
+        <p>Not everything on a screen deserves equal attention. Strong visual hierarchy uses size, color, spacing, and contrast to guide the eye toward what matters most first &mdash; typically a headline, then supporting detail, then a call to action. Without hierarchy, users are left to scan a wall of equally weighted elements and often miss the one thing you actually wanted them to notice.</p>
+
+        <h2>3. Keep Interactions Consistent</h2>
+        <p>Buttons should look like buttons everywhere on your site, not just on the homepage. Consistent colors, spacing, and component behavior reduce the mental effort required to use your product, because users can apply what they learned on one screen to every other screen. Inconsistency, even small, subconsciously signals a lack of polish.</p>
+
+        <h2>4. Design for Thumbs, Not Just Cursors</h2>
+        <p>With most traffic now arriving on mobile devices, interactive elements need to be sized and positioned for a thumb, not a mouse pointer. Buttons that are too small or placed too close together lead to mis-taps and frustration. Prioritizing comfortable touch targets is no longer optional &mdash; it's a baseline expectation.</p>
+
+        <h2>5. Reduce the Number of Steps</h2>
+        <p>Every additional field, click, or page between a user and their goal is an opportunity for them to abandon the process. Whether it's a checkout flow, a contact form, or a signup process, the best UX ruthlessly cuts unnecessary steps. If a piece of information isn't essential to complete the action, it shouldn't be required upfront.</p>
+
+        <h2>6. Use Real Feedback, Not Guesswork</h2>
+        <p>Assumptions about what users want are frequently wrong. Simple tools like heatmaps, session recordings, and direct user testing reveal where people actually get stuck &mdash; often in places a design team never expected. Treating design as an ongoing, evidence-based process produces far better results than a one-time redesign based on internal opinion.</p>
+
+        <h2>Conclusion</h2>
+        <p>Great UI/UX design is invisible when done well &mdash; users simply accomplish what they came to do without friction or confusion. Investing in clarity, consistency, and continuous feedback pays off directly in higher engagement, fewer support requests, and stronger conversion rates.</p>
+      `
+    },
+    3: {
+      img: 'images/blog-3-pos.png',
+      tag: 'POS Systems',
+      title: 'How POS Systems Can Transform Your Business',
+      date: 'Jul 10, 2026',
+      readTime: '6 min read',
+      content: `
+        <p>For retailers, shops, and businesses handling frequent transactions, a modern Point of Sale (POS) system is no longer a luxury &mdash; it's core infrastructure. What used to be a simple cash register has evolved into a connected platform that manages sales, inventory, staff, and customer relationships in one place. Businesses still relying on manual record-keeping or outdated systems are often losing time and revenue without realizing it.</p>
+
+        <h2>1. Faster, More Accurate Transactions</h2>
+        <p>A well-built POS system speeds up checkout by automating price lookups, tax calculations, and receipt generation. This reduces human error at the till, shortens queues during peak hours, and creates a smoother experience for customers &mdash; which directly affects whether they choose to return.</p>
+
+        <h2>2. Real-Time Inventory Tracking</h2>
+        <p>Manually tracking stock levels is time-consuming and error-prone, often leading to overselling out-of-stock items or over-ordering slow movers. A POS system updates inventory automatically with every sale, giving business owners an accurate, real-time picture of what's on the shelves and what needs reordering &mdash; eliminating guesswork from purchasing decisions.</p>
+
+        <h2>3. Centralized Sales Data and Reporting</h2>
+        <p>Every transaction becomes usable data: best-selling products, peak sales hours, slow-moving stock, and staff performance are all captured automatically. This turns day-to-day operations into a source of business intelligence, allowing owners to make decisions based on real numbers rather than intuition alone.</p>
+
+        <h2>4. Multi-Location and Multi-User Support</h2>
+        <p>For businesses operating more than one outlet, a cloud-connected POS system consolidates sales and inventory data across all locations into a single dashboard. Owners can compare branch performance, manage staff access levels, and maintain consistent pricing without visiting each site individually.</p>
+
+        <h2>5. Better Customer Relationships</h2>
+        <p>Many modern POS systems include built-in customer profiles, purchase history, and loyalty program support. This allows businesses to recognize repeat customers, tailor promotions, and build the kind of personalized relationships that keep people coming back &mdash; something a plain cash register simply can't offer.</p>
+
+        <h2>6. Reduced Losses from Fraud and Errors</h2>
+        <p>Digital transaction logs, user-level access controls, and audit trails make it far harder for discrepancies to go unnoticed. Business owners gain visibility into exactly who processed which sale, when, and for how much &mdash; a level of accountability that manual systems rarely provide.</p>
+
+        <h2>Conclusion</h2>
+        <p>A POS system is more than a checkout tool &mdash; it's the operational backbone that connects sales, inventory, staff, and customers into one coherent system. For growing businesses, upgrading to a smart POS solution often pays for itself quickly through faster service, fewer errors, and sharper decision-making.</p>
+      `
+    },
+    4: {
+      img: 'images/blog-4-cloud.png',
+      tag: 'Cloud Solutions',
+      title: 'Why Your Business Should Move to the Cloud',
+      date: 'Jul 2, 2026',
+      readTime: '4 min read',
+      content: `
+        <p>For years, "moving to the cloud" sounded like something only large corporations needed to worry about. That's no longer true. Cloud solutions have become accessible and affordable for businesses of every size, and the operational advantages they offer &mdash; flexibility, security, and cost savings &mdash; are now a competitive necessity rather than a nice-to-have.</p>
+
+        <h2>1. Lower Upfront and Maintenance Costs</h2>
+        <p>Traditional on-premise servers require significant upfront hardware investment, plus ongoing costs for maintenance, power, and IT staff to keep everything running. Cloud infrastructure shifts this to a predictable subscription model, letting businesses pay only for the resources they actually use while avoiding the capital expense of physical servers.</p>
+
+        <h2>2. Access Your Business from Anywhere</h2>
+        <p>Cloud-based systems allow staff and owners to access business data, applications, and files from any location with an internet connection. This is especially valuable for businesses with remote teams, multiple branches, or owners who need visibility into operations while away from the office.</p>
+
+        <h2>3. Built-In Scalability</h2>
+        <p>As a business grows, its technology needs to grow with it. Cloud platforms make it simple to add storage, processing power, or new users on demand, without the delays and costs associated with purchasing and installing new physical hardware. This flexibility means the business only pays for capacity as it's actually needed.</p>
+
+        <h2>4. Stronger Data Security and Backup</h2>
+        <p>Reputable cloud providers invest heavily in security infrastructure &mdash; encryption, regular backups, and redundancy across multiple data centers &mdash; at a level most small and medium businesses could never replicate on their own. This significantly reduces the risk of permanent data loss from hardware failure, theft, or disaster.</p>
+
+        <h2>5. Easier Collaboration</h2>
+        <p>Cloud tools allow multiple team members to work on the same documents, systems, or dashboards simultaneously, with changes reflected in real time. This eliminates the version-control chaos of emailing files back and forth and keeps everyone working from the same up-to-date information.</p>
+
+        <h2>Conclusion</h2>
+        <p>Moving to the cloud is no longer just an IT decision &mdash; it's a business decision that affects cost efficiency, flexibility, and resilience. Businesses that make the shift position themselves to scale faster and operate more reliably than those still tied to on-premise systems.</p>
+      `
+    },
+    5: {
+      img: 'images/blog-5-mobile.png',
+      tag: 'Mobile Development',
+      title: 'Top Trends in Mobile App Development 2026',
+      date: 'Jun 24, 2026',
+      readTime: '5 min read',
+      content: `
+        <p>Mobile apps remain one of the most direct ways for a business to reach its customers, but the standards for what makes an app worth keeping installed keep rising. Users are quicker than ever to abandon apps that feel slow, generic, or disconnected from their needs. Staying aware of where mobile development is heading helps businesses invest in the right features rather than chasing outdated ones.</p>
+
+        <h2>1. AI-Powered Personalization</h2>
+        <p>Apps are increasingly using on-device and cloud-based intelligence to tailor content, recommendations, and notifications to individual users rather than showing the same experience to everyone. This raises engagement because the app feels like it understands what each user actually wants, rather than broadcasting generic content.</p>
+
+        <h2>2. Cross-Platform Development</h2>
+        <p>Building separate native apps for Android and iOS is increasingly being replaced by cross-platform frameworks that allow a single codebase to run smoothly on both. This reduces development time and cost while keeping the app consistent across devices &mdash; a major advantage for businesses with limited development budgets.</p>
+
+        <h2>3. Super Apps and All-in-One Experiences</h2>
+        <p>Rather than requiring users to juggle multiple separate apps, businesses are consolidating services &mdash; payments, messaging, bookings, support &mdash; into a single app experience. This trend reduces friction for users and increases the amount of time they spend within one ecosystem.</p>
+
+        <h2>4. Stronger Focus on App Security</h2>
+        <p>As mobile apps handle more sensitive data &mdash; payments, personal details, business records &mdash; security has moved from an afterthought to a core design requirement. Biometric authentication, end-to-end encryption, and secure API practices are now expected features rather than premium add-ons.</p>
+
+        <h2>5. Offline-First Functionality</h2>
+        <p>Reliable internet access still isn't guaranteed everywhere. Apps designed to function &mdash; at least partially &mdash; without an active connection, syncing data once connectivity returns, provide a noticeably better experience for users in areas with inconsistent network coverage.</p>
+
+        <h2>6. Lightweight, Fast-Loading Design</h2>
+        <p>As device diversity increases, apps optimized for speed and low storage footprint reach a wider audience, including users on older or budget devices. Performance has become a competitive differentiator, not just a technical detail.</p>
+
+        <h2>Conclusion</h2>
+        <p>Mobile app development in 2026 is defined by personalization, efficiency, and trust. Businesses that build apps with these priorities in mind are better positioned to retain users in an environment where attention spans and storage space are both limited.</p>
+      `
+    },
+    6: {
+      img: 'images/blog-6-cybersecurity.png',
+      tag: 'Cybersecurity',
+      title: '7 Tips to Keep Your Business Data Secure',
+      date: 'Jun 15, 2026',
+      readTime: '6 min read',
+      content: `
+        <p>Cybersecurity is frequently treated as a concern only for large enterprises, but small and medium businesses are increasingly targeted precisely because they tend to have weaker defenses. A single breach can mean lost customer trust, financial damage, and in some cases, business-ending downtime. The good news is that many effective protections don't require an enterprise-sized budget &mdash; just consistent, deliberate practices.</p>
+
+        <h2>1. Enforce Strong, Unique Passwords</h2>
+        <p>Reused or weak passwords remain one of the most common entry points for attackers. Requiring strong, unique passwords for every system &mdash; ideally managed through a password manager &mdash; closes off one of the easiest routes into your business's accounts and data.</p>
+
+        <h2>2. Enable Multi-Factor Authentication</h2>
+        <p>Even a strong password can be stolen through phishing or a data breach elsewhere. Multi-factor authentication adds a second verification step, meaning a stolen password alone isn't enough for an attacker to gain access &mdash; a simple change that blocks the vast majority of automated attacks.</p>
+
+        <h2>3. Keep Software and Systems Updated</h2>
+        <p>Outdated software is one of the most exploited weaknesses in any system, because known vulnerabilities are publicly documented and actively targeted. Applying security updates promptly, rather than postponing them, closes these gaps before they can be exploited.</p>
+
+        <h2>4. Back Up Data Regularly</h2>
+        <p>Ransomware and hardware failure can both result in permanent data loss without a reliable backup strategy. Regular, automated backups &mdash; ideally stored separately from the main system &mdash; ensure a business can recover quickly instead of losing critical records entirely.</p>
+
+        <h2>5. Train Staff to Recognize Phishing</h2>
+        <p>Technical defenses can't stop an employee from clicking a convincing fake email. Regular, practical training on how to spot phishing attempts and suspicious links significantly reduces the human error that leads to most breaches.</p>
+
+        <h2>6. Limit Access Based on Role</h2>
+        <p>Not every employee needs access to every system or piece of data. Restricting access based on actual job requirements limits the potential damage if any single account is compromised, and makes it easier to trace the source of an issue if one occurs.</p>
+
+        <h2>7. Use Secure, Monitored Networks</h2>
+        <p>Public or unsecured Wi-Fi networks expose business data to interception. Using secured networks, firewalls, and monitoring tools to flag unusual activity helps catch potential threats early, before they escalate into a full breach.</p>
+
+        <h2>Conclusion</h2>
+        <p>Cybersecurity doesn't require an unlimited budget &mdash; it requires consistency. Businesses that build these habits into their everyday operations are far better protected than those that treat security as a one-time setup, and far more resilient when new threats inevitably emerge.</p>
+      `
+    }
+  };
+
+  (function(){
+    var catButtons = document.querySelectorAll('.cat-row');
+    var cards = document.querySelectorAll('.article-card');
+    var resultsCount = document.getElementById('resultsCount');
+
+    catButtons.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        catButtons.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.getAttribute('data-category');
+        var visible = 0;
+        cards.forEach(function(card){
+          var match = (cat === 'all' || card.getAttribute('data-category') === cat);
+          card.style.display = match ? '' : 'none';
+          if(match) visible++;
+        });
+        if(resultsCount) resultsCount.textContent = 'Showing ' + visible + ' of 6 articles';
+      });
+    });
+  })();
+
+  (function(){
+    var overlayForPop = document.getElementById('articleModalOverlay');
+    document.querySelectorAll('.pop-row[data-article]').forEach(function(row){
+      row.addEventListener('click', function(){
+        var link = document.querySelector('.read-more[data-article="' + row.getAttribute('data-article') + '"]');
+        if(link) link.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+      });
+    });
+  })();
   (function(){
     var overlay = document.getElementById('articleModalOverlay');
-    var openLink = document.getElementById('readMoreArticle1');
     var closeBtn = document.getElementById('articleModalClose');
+    var modalImg = document.getElementById('articleModalImg');
+    var modalTag = document.getElementById('articleModalTag');
+    var modalTitle = document.getElementById('articleModalTitle');
+    var modalDate = document.getElementById('articleModalDate');
+    var modalReadTime = document.getElementById('articleModalReadTime');
+    var modalContent = document.getElementById('articleModalContent');
 
     function openModal(e){
       if(e) e.preventDefault();
+      var id = e.currentTarget.getAttribute('data-article');
+      if(id && articleData[id]){
+        var a = articleData[id];
+        modalImg.src = a.img;
+        modalImg.alt = a.title;
+        modalTag.textContent = a.tag;
+        modalTitle.textContent = a.title;
+        modalDate.textContent = a.date;
+        modalReadTime.textContent = a.readTime;
+        modalContent.innerHTML = a.content;
+      }
       overlay.classList.add('open');
       overlay.scrollTop = 0;
       document.body.style.overflow = 'hidden';
@@ -693,7 +943,9 @@
       document.body.style.overflow = '';
     }
 
-    if(openLink) openLink.addEventListener('click', openModal);
+    document.querySelectorAll('.read-more[data-article]').forEach(function(link){
+      link.addEventListener('click', openModal);
+    });
     if(closeBtn) closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', function(e){
       if(e.target === overlay) closeModal();
