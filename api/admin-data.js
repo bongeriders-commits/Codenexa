@@ -7,6 +7,7 @@ const COLLECTION_ORDER_FIELDS = {
   quote_requests: 'submittedAt',
   callback_requests: 'submittedAt',
   newsletter_subscribers: 'subscribedAt',
+  orders: 'submittedAt',
 };
 const COLLECTIONS = Object.keys(COLLECTION_ORDER_FIELDS);
 const LIMIT_PER_COLLECTION = 200;
