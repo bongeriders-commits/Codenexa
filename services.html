@@ -135,12 +135,6 @@
   }
   .svc-card h3{font-size:17px;color:var(--navy);margin-bottom:8px;}
   .svc-card p{font-size:13.5px;color:var(--gray-text);margin-bottom:14px;}
-  .svc-card .learn-more{
-    font-size:13.5px;font-weight:600;color:var(--blue);
-    display:inline-flex;align-items:center;gap:6px;
-  }
-  .svc-card .learn-more i{font-size:11px;transition:.2s;}
-  .svc-card:hover .learn-more i{transform:translateX(3px);}
 
   /* ---------- Feature strip ---------- */
   .feature-strip{
@@ -237,6 +231,24 @@
     .process-connector{display:none;}
     .cta-banner{flex-direction:column;text-align:center;}
   }
+
+  @media(max-width:480px){
+    .logo-wrap img{height:38px;}
+    .logo-text .brand{font-size:16px;}
+    .logo-text .tagline{font-size:7.5px;letter-spacing:1px;}
+    .header-actions .btn-primary{padding:9px 14px;font-size:13px;}
+    .hero{padding:16px 18px 36px;}
+    .hero h1{font-size:30px;}
+    .hero p{font-size:14px;}
+    .services-section{padding:36px 18px 20px;}
+    .services-grid{grid-template-columns:1fr;gap:16px;}
+    .feature-strip{margin:30px 18px 0;grid-template-columns:1fr;padding:26px 20px;gap:20px;}
+    .process-section{padding:36px 18px 30px;}
+    .cta-banner{padding:28px 18px;}
+    .cta-left{flex-direction:column;text-align:center;gap:12px;}
+    .cta-actions{flex-direction:column;width:100%;}
+    .cta-actions .btn{width:100%;justify-content:center;}
+  }
 </style>
 </head>
 <body>
@@ -289,49 +301,41 @@
       <div class="svc-icon"><i class="fa-solid fa-laptop-code"></i></div>
       <h3>Web Development</h3>
       <p>Modern, responsive and high-performance websites that represent your brand and drive results.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
       <h3>Mobile App Development</h3>
       <p>Powerful Android mobile applications built to deliver great user experiences and solve real problems.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-cart-shopping"></i></div>
       <h3>POS Systems</h3>
       <p>Smart and reliable Point of Sale systems for retail, quarries, shops and businesses of all sizes.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-desktop"></i></div>
       <h3>Desktop Software</h3>
       <p>Custom desktop applications that simplify operations and increase productivity.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
       <h3>Cloud Solutions</h3>
       <p>Scalable cloud applications and services to grow your business securely.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-palette"></i></div>
       <h3>UI/UX Design</h3>
       <p>Beautiful, user-friendly and engaging designs that create lasting impressions.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-shield-halved"></i></div>
       <h3>Cybersecurity</h3>
       <p>Protect your systems and data with our advanced security solutions and best practices.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
     <div class="svc-card">
       <div class="svc-icon"><i class="fa-solid fa-gears"></i></div>
       <h3>Software Maintenance</h3>
       <p>We provide ongoing support and maintenance to keep your systems running smoothly.</p>
-      <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
     </div>
   </div>
 
