@@ -43,12 +43,48 @@
   .logo-text .brand{font-weight:800;font-size:18px;color:var(--navy);letter-spacing:.3px;}
   .logo-text .brand span{color:var(--blue);}
   .logo-text .tagline{font-size:9.5px;letter-spacing:1px;color:var(--gray-text);}
-  .header-actions{display:flex;align-items:center;gap:14px;}
-  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
-  .hamburger span{width:22px;height:2.4px;background:var(--navy);border-radius:2px;}
-  nav ul{display:flex;gap:28px;padding:0 48px 16px;}
-  nav ul li a{font-size:14px;font-weight:600;color:#2a3242;}
-  nav ul li a:hover, nav ul li a.active{color:var(--blue);}
+  .hamburger{
+    display:flex;flex-direction:column;justify-content:center;gap:5px;
+    width:44px;height:44px;background:none;border:1.5px solid #e0e5ee;border-radius:9px;
+    cursor:pointer;padding:0;align-items:center;transition:.2s;
+  }
+  .hamburger:hover{border-color:var(--blue);background:#f5f9ff;}
+  .hamburger span{width:20px;height:2.4px;background:var(--navy);border-radius:2px;transition:.25s;}
+  .hamburger.active span:nth-child(1){transform:translateY(7.4px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-7.4px) rotate(-45deg);}
+
+  .nav-overlay{
+    position:fixed;inset:0;background:rgba(8,18,40,0.45);opacity:0;visibility:hidden;
+    transition:opacity .25s;z-index:150;
+  }
+  .nav-overlay.open{opacity:1;visibility:visible;}
+
+  nav{
+    position:fixed;top:0;right:0;height:100vh;width:320px;max-width:86vw;
+    background:#fff;z-index:151;box-shadow:-8px 0 32px rgba(10,26,60,0.18);
+    transform:translateX(100%);transition:transform .3s ease;
+    display:flex;flex-direction:column;overflow-y:auto;
+  }
+  nav.open{transform:translateX(0);}
+  .nav-panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 22px;border-bottom:1px solid #eef1f6;
+  }
+  .nav-panel-head span{font-weight:800;color:var(--navy);font-size:15px;letter-spacing:.3px;}
+  .nav-close{
+    width:36px;height:36px;border-radius:8px;border:1.5px solid #e0e5ee;background:none;
+    cursor:pointer;color:var(--navy);font-size:16px;display:flex;align-items:center;justify-content:center;
+  }
+  .nav-close:hover{border-color:var(--blue);color:var(--blue);}
+  nav ul{display:flex;flex-direction:column;padding:10px 12px;gap:2px;}
+  nav ul li a{
+    display:block;font-size:15px;font-weight:600;color:#2a3242;
+    padding:13px 12px;border-radius:8px;transition:.15s;
+  }
+  nav ul li a:hover, nav ul li a.active{color:var(--blue);background:#f2f7ff;}
+  .nav-panel-foot{padding:16px 22px 24px;margin-top:auto;border-top:1px solid #eef1f6;}
+  .nav-panel-foot .btn{width:100%;justify-content:center;}
 
   .page-hero{
     background:linear-gradient(135deg,var(--navy-deep),var(--navy));
@@ -167,7 +203,6 @@
 
   @media(max-width:980px){
     header{padding:14px 20px;}
-    nav ul{padding:6px 20px 18px;flex-wrap:wrap;}
     .page-hero{padding:44px 20px 34px;}
     .plan-picker{grid-template-columns:1fr;}
     .form-row{grid-template-columns:1fr;}
@@ -187,23 +222,29 @@
       <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
     </div>
   </div>
-  <div class="header-actions">
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mainNav">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav id="mainNav">
+  <div class="nav-panel-head">
+    <span>Menu</span>
+    <button class="nav-close" id="navCloseBtn" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-panel-foot">
     <a href="pricing.html" class="btn btn-outline">&lsaquo; Back to Pricing</a>
   </div>
-  <nav id="mainNav">
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+</nav>
 
 <section class="page-hero">
   <div class="crumb"><a href="index.html">Home</a> / <a href="pricing.html">Pricing</a> / Buy Now</div>
@@ -397,14 +438,39 @@
 </footer>
 
 <script>
-  // Mobile nav toggle
+  // Nav drawer toggle
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mainNav = document.getElementById('mainNav');
+  const navOverlay = document.getElementById('navOverlay');
+  const navCloseBtn = document.getElementById('navCloseBtn');
+
+  function openNav(){
+    mainNav.classList.add('open');
+    navOverlay.classList.add('open');
+    hamburgerBtn.classList.add('active');
+    hamburgerBtn.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeNav(){
+    mainNav.classList.remove('open');
+    navOverlay.classList.remove('open');
+    hamburgerBtn.classList.remove('active');
+    hamburgerBtn.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
   if (hamburgerBtn) {
     hamburgerBtn.addEventListener('click', function(){
-      mainNav.classList.toggle('open');
+      mainNav.classList.contains('open') ? closeNav() : openNav();
     });
   }
+  if (navCloseBtn) navCloseBtn.addEventListener('click', closeNav);
+  if (navOverlay) navOverlay.addEventListener('click', closeNav);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeNav();
+  });
+  mainNav.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', closeNav);
+  });
 
   const planCards = document.querySelectorAll('.plan-card');
   const selectedPlanInput = document.getElementById('selectedPlanInput');
