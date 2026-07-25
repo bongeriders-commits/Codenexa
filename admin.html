@@ -159,6 +159,19 @@
     white-space:nowrap;
   }
   .mark-btn:hover{border-color:var(--blue);color:var(--blue);}
+  .mail-btn{
+    background:var(--blue);
+    border:1.5px solid var(--blue);
+    border-radius:6px;
+    padding:6px 12px;
+    font-size:12.5px;
+    cursor:pointer;
+    color:#fff;
+    white-space:nowrap;
+  }
+  .mail-btn:hover{background:var(--blue-bright);}
+  .mail-btn:disabled{opacity:.6;cursor:default;}
+  .mail-btn.sent{background:transparent;border-color:#dbe1ea;color:var(--green);cursor:default;}
   .empty-row td{text-align:center;color:var(--gray-text);padding:36px;}
   .refresh-btn{
     background:transparent;
@@ -204,6 +217,7 @@
   <div class="tabs" id="tabs">
     <button class="tab-btn active" data-tab="contact_messages">Contact <span class="tab-count" id="count-contact_messages">0</span></button>
     <button class="tab-btn" data-tab="quote_requests">Quotes <span class="tab-count" id="count-quote_requests">0</span></button>
+    <button class="tab-btn" data-tab="orders">Orders <span class="tab-count" id="count-orders">0</span></button>
     <button class="tab-btn" data-tab="callback_requests">Callbacks <span class="tab-count" id="count-callback_requests">0</span></button>
     <button class="tab-btn" data-tab="newsletter_subscribers">Subscribers <span class="tab-count" id="count-newsletter_subscribers">0</span></button>
   </div>
@@ -244,6 +258,19 @@
       { key: 'status', label: 'Status', fmt: fmtStatus },
       { key: '_action', label: '' },
     ],
+    orders: [
+      { key: 'submittedAt', label: 'Date', fmt: fmtDate },
+      { key: 'orderNumber', label: 'Order #' },
+      { key: 'plan', label: 'Plan' },
+      { key: 'price', label: 'Price', fmt: fmtPrice },
+      { key: 'fullName', label: 'Customer' },
+      { key: 'phone', label: 'Phone' },
+      { key: 'email', label: 'Email' },
+      { key: '_location', label: 'Location', fmt: fmtLocation },
+      { key: 'notes', label: 'Notes', cls: 'msg-cell' },
+      { key: 'status', label: 'Status', fmt: fmtStatus },
+      { key: '_action', label: '' },
+    ],
     callback_requests: [
       { key: 'submittedAt', label: 'Date', fmt: fmtDate },
       { key: 'phone', label: 'Phone' },
@@ -264,6 +291,13 @@
   function fmtStatus(v){
     const s = v || 'new';
     return `<span class="status-badge ${s}">${s}</span>`;
+  }
+  function fmtPrice(v){
+    if(v == null || v === '') return '—';
+    return 'KSh ' + Number(v).toLocaleString('en-KE');
+  }
+  function fmtLocation(_v, row){
+    return esc([row.town, row.county, row.address].filter(Boolean).join(', ') || '—');
   }
   function esc(v){
     return String(v == null ? '' : v).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -360,16 +394,52 @@
       return '<tr>' + cols.map(c => {
         if(c.key === '_action'){
           const nextStatus = row.status === 'done' ? 'new' : 'done';
-          return `<td><button class="mark-btn" data-id="${esc(row.id)}" data-collection="${currentTab}" data-status="${nextStatus}">Mark as ${nextStatus}</button></td>`;
+          const statusBtn = `<button class="mark-btn" data-id="${esc(row.id)}" data-collection="${currentTab}" data-status="${nextStatus}">Mark as ${nextStatus}</button>`;
+          if(currentTab !== 'orders'){
+            return `<td>${statusBtn}</td>`;
+          }
+          const mailBtn = row.emailSent
+            ? `<button class="mail-btn sent" disabled><i class="fa-solid fa-check"></i> Email Sent</button>`
+            : `<button class="mail-btn" data-order-id="${esc(row.id)}"><i class="fa-solid fa-envelope"></i> Send Email</button>`;
+          return `<td><div style="display:flex;flex-direction:column;gap:6px;">${mailBtn}${statusBtn}</div></td>`;
         }
         const raw = row[c.key];
-        const val = c.fmt ? c.fmt(raw) : esc(raw || '—');
+        const val = c.fmt ? c.fmt(raw, row) : esc(raw || '—');
         return `<td class="${c.cls || ''}">${val}</td>`;
       }).join('') + '</tr>';
     }).join('');
   }
 
   document.getElementById('tableBody').addEventListener('click', async function(e){
+    const mailBtn = e.target.closest('.mail-btn:not(.sent)');
+    if(mailBtn && mailBtn.dataset.orderId){
+      const orderId = mailBtn.dataset.orderId;
+      mailBtn.disabled = true;
+      mailBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending…';
+      try{
+        const res = await fetch('/api/send-order-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId })
+        });
+        const data = await res.json();
+        if(res.ok && data.ok){
+          const item = allData.orders.find(r => r.id === orderId);
+          if(item) item.emailSent = true;
+          renderTable();
+        }else{
+          mailBtn.disabled = false;
+          mailBtn.innerHTML = '<i class="fa-solid fa-envelope"></i> Retry Send';
+          alert(data.error || 'Failed to send email. Check email settings.');
+        }
+      }catch(err){
+        console.error('Failed to send order email:', err);
+        mailBtn.disabled = false;
+        mailBtn.innerHTML = '<i class="fa-solid fa-envelope"></i> Retry Send';
+      }
+      return;
+    }
+
     const btn = e.target.closest('.mark-btn');
     if(!btn) return;
     btn.disabled = true;

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buy Now | CodeNexa Solutions</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --navy:#0a1a3c;
+    --navy-deep:#081228;
+    --blue:#1e6fe0;
+    --blue-bright:#2f8bff;
+    --gray-text:#5b6675;
+    --light-bg:#f5f7fa;
+    --white:#ffffff;
+    --green:#1a8f4c;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    color:#1b2434;
+    line-height:1.5;
+    background:var(--white);
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:8px;font-size:14.5px;font-weight:600;cursor:pointer;border:none;transition:.2s;}
+  .btn-primary{background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;}
+  .btn-primary:hover{filter:brightness(1.08);}
+  .btn-outline{background:transparent;border:1.5px solid #cfd6e2;color:var(--navy);}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 48px;position:sticky;top:0;background:#fff;z-index:100;
+    box-shadow:0 2px 14px rgba(20,40,90,0.06);
+  }
+  .logo-wrap{display:flex;align-items:center;gap:10px;}
+  .logo-wrap img{height:42px;}
+  .logo-text .brand{font-weight:800;font-size:18px;color:var(--navy);letter-spacing:.3px;}
+  .logo-text .brand span{color:var(--blue);}
+  .logo-text .tagline{font-size:9.5px;letter-spacing:1px;color:var(--gray-text);}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .hamburger span{width:22px;height:2.4px;background:var(--navy);border-radius:2px;}
+  nav ul{display:flex;gap:28px;padding:0 48px 16px;}
+  nav ul li a{font-size:14px;font-weight:600;color:#2a3242;}
+  nav ul li a:hover, nav ul li a.active{color:var(--blue);}
+
+  .page-hero{
+    background:linear-gradient(135deg,var(--navy-deep),var(--navy));
+    color:#fff;padding:56px 48px 44px;text-align:center;
+  }
+  .page-hero .crumb{font-size:13px;color:#9fb2d6;margin-bottom:10px;}
+  .page-hero .crumb a{color:#9fb2d6;}
+  .page-hero .crumb a:hover{color:#fff;}
+  .page-hero h1{font-size:34px;font-weight:800;margin-bottom:10px;}
+  .page-hero h1 span{color:var(--blue-bright);}
+  .page-hero p{font-size:15px;color:#c3cee5;max-width:560px;margin:0 auto;}
+
+  .checkout-wrap{max-width:920px;margin:0 auto;padding:60px 24px 90px;}
+
+  .plan-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:50px;}
+  .plan-card{
+    border:2px solid #e6e9ef;border-radius:14px;padding:26px 20px;text-align:center;
+    cursor:pointer;transition:.2s;background:#fff;
+  }
+  .plan-card:hover{border-color:#b9c8e8;}
+  .plan-card.selected{border-color:var(--blue);box-shadow:0 8px 24px rgba(30,111,224,0.16);background:#f6f9ff;}
+  .plan-card .plan-name{font-size:16px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+  .plan-card .plan-price{font-size:22px;font-weight:800;color:var(--blue);margin-bottom:4px;}
+  .plan-card .plan-note{font-size:12px;color:var(--gray-text);}
+  .plan-card .plan-check{
+    width:22px;height:22px;border-radius:50%;border:2px solid #cfd6e2;margin:14px auto 0;
+    display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;
+  }
+  .plan-card.selected .plan-check{background:var(--blue);border-color:var(--blue);}
+
+  .checkout-form-card{
+    background:#fff;border:1px solid #e6e9ef;border-radius:14px;
+    padding:36px;box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .checkout-form-card h2{font-size:22px;color:var(--navy);font-weight:800;margin-bottom:6px;}
+  .checkout-form-card > p{font-size:14px;color:var(--gray-text);margin-bottom:26px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field-group{margin-bottom:18px;}
+  .field-group label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+  .field-group label .opt{color:var(--gray-text);font-weight:400;}
+  .field-input-wrap{position:relative;}
+  .field-input-wrap i{position:absolute;left:14px;top:16px;color:var(--gray-text);font-size:14px;}
+  .field-group input,.field-group textarea{
+    width:100%;border:1.5px solid #dfe3ec;border-radius:8px;
+    padding:12px 14px 12px 40px;font-size:14px;color:#1b2434;background:#fbfcfe;
+  }
+  .field-group textarea{padding-left:14px;resize:vertical;min-height:90px;font-family:inherit;}
+  .field-group input:focus,.field-group textarea:focus{
+    outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(30,111,224,0.12);
+  }
+  .honeypot{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;}
+
+  .payment-box{
+    display:flex;align-items:center;gap:14px;background:#f0f7ff;border:1.5px solid #cfe0fb;
+    border-radius:10px;padding:16px 18px;margin-bottom:24px;
+  }
+  .payment-box i{font-size:22px;color:var(--blue);}
+  .payment-box .p-title{font-size:14.5px;font-weight:700;color:var(--navy);}
+  .payment-box .p-sub{font-size:12.5px;color:var(--gray-text);}
+
+  .order-summary-line{
+    display:flex;justify-content:space-between;font-size:14px;color:var(--gray-text);
+    padding:8px 0;border-top:1px dashed #e6e9ef;
+  }
+  .order-summary-line.total{font-weight:800;color:var(--navy);font-size:16px;}
+
+  .form-send-btn{
+    width:100%;border:none;border-radius:8px;padding:15px;margin-top:6px;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue));color:#fff;
+    font-size:15px;font-weight:700;cursor:pointer;transition:.2s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .form-send-btn:hover{filter:brightness(1.08);}
+  .form-send-btn:disabled{opacity:.7;cursor:default;}
+  .form-status{
+    display:none;align-items:center;gap:10px;
+    font-size:13px;font-weight:600;border-radius:8px;padding:12px 14px;margin-top:16px;
+  }
+  .form-status.show{display:flex;}
+  .form-status.error{background:#fdeceb;color:#c0392b;}
+
+  .confirm-card{
+    background:#fff;border:1px solid #e6e9ef;border-radius:14px;
+    padding:48px 36px;text-align:center;box-shadow:0 6px 20px rgba(20,40,90,0.06);
+  }
+  .confirm-icon{
+    width:74px;height:74px;border-radius:50%;background:#e9f9ef;color:var(--green);
+    display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 20px;
+  }
+  .confirm-card h2{font-size:24px;color:var(--navy);font-weight:800;margin-bottom:8px;}
+  .confirm-card > p{font-size:14.5px;color:var(--gray-text);margin-bottom:26px;}
+  .order-number-box{
+    background:var(--light-bg);border:1.5px dashed #cfd6e2;border-radius:10px;
+    padding:18px;margin-bottom:26px;
+  }
+  .order-number-box .lbl{font-size:12px;color:var(--gray-text);margin-bottom:4px;}
+  .order-number-box .num{font-size:24px;font-weight:800;color:var(--blue);letter-spacing:1px;}
+  .confirm-detail-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;text-align:left;
+    background:#fbfcfe;border:1px solid #eef1f6;border-radius:10px;padding:20px;margin-bottom:30px;
+  }
+  .confirm-detail-grid div .lbl{font-size:11.5px;color:var(--gray-text);margin-bottom:3px;}
+  .confirm-detail-grid div .val{font-size:14px;font-weight:600;color:var(--navy);}
+
+  footer{background:var(--navy-deep);color:#c3cee5;padding:60px 48px 26px;}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .footer-col h4{color:#fff;font-size:14px;letter-spacing:1px;margin-bottom:16px;}
+  .footer-col p{font-size:13px;line-height:1.6;margin-bottom:14px;}
+  .footer-col ul li{margin-bottom:10px;font-size:13.5px;}
+  .footer-col ul li a:hover{color:var(--blue-bright);}
+  .footer-col .contact-line{display:flex;gap:10px;margin-bottom:12px;font-size:13.5px;}
+  .socials{display:flex;gap:10px;margin-top:16px;}
+  .socials a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:14px;}
+  .footer-bottom{display:flex;justify-content:space-between;padding-top:20px;font-size:12.5px;}
+  .footer-bottom .brand-mini span{color:var(--blue-bright);}
+
+  @media(max-width:980px){
+    header{padding:14px 20px;}
+    nav ul{padding:6px 20px 18px;flex-wrap:wrap;}
+    .page-hero{padding:44px 20px 34px;}
+    .plan-picker{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .confirm-detail-grid{grid-template-columns:1fr;}
+    .checkout-form-card{padding:24px;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="images/logo.png" alt="CodeNexa Solutions logo">
+    <div class="logo-text">
+      <div class="brand">CODE<span>NEXA</span></div>
+      <div class="tagline">SOLUTIONS &nbsp;&middot;&nbsp; WE CODE YOUR VISION</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <a href="pricing.html" class="btn btn-outline">&lsaquo; Back to Pricing</a>
+  </div>
+  <nav id="mainNav">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="crumb"><a href="index.html">Home</a> / <a href="pricing.html">Pricing</a> / Buy Now</div>
+  <h1>Complete Your <span>Order</span></h1>
+  <p>Choose your package and enter your delivery details. No payment needed now — you only pay when your order is delivered.</p>
+</section>
+
+<div class="checkout-wrap">
+
+  <!-- Package picker -->
+  <div class="plan-picker" id="planPicker">
+    <div class="plan-card" data-plan="Basic" data-price="20000">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">KSh 20,000</div>
+      <div class="plan-note">Ideal for small businesses</div>
+      <div class="plan-check"><i class="fa-solid fa-check"></i></div>
+    </div>
+    <div class="plan-card" data-plan="Standard" data-price="60000">
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">KSh 60,000</div>
+      <div class="plan-note">Ideal for growing businesses</div>
+      <div class="plan-check"><i class="fa-solid fa-check"></i></div>
+    </div>
+    <div class="plan-card" data-plan="Premium" data-price="100000">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">KSh 100,000</div>
+      <div class="plan-note">Ideal for established businesses</div>
+      <div class="plan-check"><i class="fa-solid fa-check"></i></div>
+    </div>
+  </div>
+
+  <!-- Checkout form -->
+  <div class="checkout-form-card" id="checkoutFormCard">
+    <h2>Delivery &amp; Contact Details</h2>
+    <p>Tell us where to reach you and where to deliver.</p>
+
+    <div class="payment-box">
+      <i class="fa-solid fa-truck-fast"></i>
+      <div>
+        <div class="p-title">Pay on Delivery</div>
+        <div class="p-sub">No payment required now — pay in cash when your order arrives.</div>
+      </div>
+    </div>
+
+    <form id="checkoutForm" novalidate>
+      <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="plan" id="selectedPlanInput" value="">
+
+      <div class="form-row">
+        <div class="field-group">
+          <label>Full Name</label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="fullName" required placeholder="Jane Wanjiku">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Phone Number</label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" name="phone" required placeholder="07XX XXX XXX">
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Email Address</label>
+        <div class="field-input-wrap">
+          <i class="fa-solid fa-envelope"></i>
+          <input type="email" name="email" required placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label>County</label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-map"></i>
+            <input type="text" name="county" required placeholder="Machakos">
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Town</label>
+          <div class="field-input-wrap">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" name="town" required placeholder="Katani">
+          </div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Delivery Address / Landmark</label>
+        <div class="field-input-wrap">
+          <i class="fa-solid fa-house"></i>
+          <input type="text" name="address" required placeholder="Street, building, nearest landmark">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Order Notes <span class="opt">(optional)</span></label>
+        <textarea name="notes" placeholder="Anything else we should know about your order?"></textarea>
+      </div>
+
+      <div class="order-summary-line" id="summaryPlanLine" style="display:none;">
+        <span id="summaryPlanName"></span><span id="summaryPlanPrice"></span>
+      </div>
+      <div class="order-summary-line total" id="summaryTotalLine" style="display:none;">
+        <span>Total Due on Delivery</span><span id="summaryTotalPrice"></span>
+      </div>
+
+      <button type="submit" class="form-send-btn" id="submitBtn">
+        <i class="fa-solid fa-bag-shopping"></i> Place Order
+      </button>
+      <div class="form-status error" id="formStatus"></div>
+    </form>
+  </div>
+
+  <!-- Confirmation panel (shown after successful order) -->
+  <div class="confirm-card" id="confirmCard" style="display:none;">
+    <div class="confirm-icon"><i class="fa-solid fa-check"></i></div>
+    <h2>Order Placed!</h2>
+    <p>Thanks — we've received your order. Save your order number below for reference.</p>
+    <div class="order-number-box">
+      <div class="lbl">YOUR ORDER NUMBER</div>
+      <div class="num" id="confirmOrderNumber">—</div>
+    </div>
+    <div class="confirm-detail-grid">
+      <div><div class="lbl">Package</div><div class="val" id="confirmPlan">—</div></div>
+      <div><div class="lbl">Amount Due</div><div class="val" id="confirmPrice">—</div></div>
+      <div><div class="lbl">Payment Method</div><div class="val">Pay on Delivery</div></div>
+      <div><div class="lbl">Status</div><div class="val">Order Received</div></div>
+    </div>
+    <a href="index.html" class="btn btn-primary">Back to Home &rsaquo;</a>
+  </div>
+
+</div>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <div class="logo-wrap" style="margin-bottom:14px;">
+        <img src="images/logo.png" alt="CodeNexa Solutions logo" style="height:38px;">
+        <div class="logo-text">
+          <div class="brand" style="color:#fff;font-size:16px;">CODE<span>NEXA</span></div>
+          <div class="tagline">SOLUTIONS</div>
+        </div>
+      </div>
+      <p>We build modern digital solutions that help businesses grow, work smarter and stay ahead of the competition.</p>
+      <div class="socials">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>QUICK LINKS</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>OUR SERVICES</h4>
+      <ul>
+        <li>Web Development</li>
+        <li>Mobile Apps</li>
+        <li>POS Systems</li>
+        <li>Desktop Software</li>
+        <li>Cloud Solutions</li>
+        <li>UI/UX Design</li>
+        <li>Maintenance &amp; Support</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>CONTACT US</h4>
+      <div class="contact-line"><i class="fa-solid fa-phone"></i> 0747 672 771</div>
+      <div class="contact-line"><i class="fa-solid fa-envelope"></i> zgichmwa@gmail.com</div>
+      <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Katani, Machakos</div>
+      <div class="contact-line"><i class="fa-solid fa-globe"></i> codenex-lemon.vercel.app</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 CodeNexa Solutions. All rights reserved.</div>
+    <div class="brand-mini">We <span>Code</span> Your Vision</div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mainNav = document.getElementById('mainNav');
+  if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', function(){
+      mainNav.classList.toggle('open');
+    });
+  }
+
+  const planCards = document.querySelectorAll('.plan-card');
+  const selectedPlanInput = document.getElementById('selectedPlanInput');
+  const summaryPlanLine = document.getElementById('summaryPlanLine');
+  const summaryTotalLine = document.getElementById('summaryTotalLine');
+  const summaryPlanName = document.getElementById('summaryPlanName');
+  const summaryPlanPrice = document.getElementById('summaryPlanPrice');
+  const summaryTotalPrice = document.getElementById('summaryTotalPrice');
+
+  function formatKsh(n){
+    return 'KSh ' + Number(n).toLocaleString('en-KE');
+  }
+
+  function selectPlan(card){
+    planCards.forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    const plan = card.dataset.plan;
+    const price = card.dataset.price;
+    selectedPlanInput.value = plan;
+    summaryPlanLine.style.display = 'flex';
+    summaryTotalLine.style.display = 'flex';
+    summaryPlanName.textContent = plan + ' Package';
+    summaryPlanPrice.textContent = formatKsh(price);
+    summaryTotalPrice.textContent = formatKsh(price);
+  }
+
+  planCards.forEach(card => {
+    card.addEventListener('click', () => selectPlan(card));
+  });
+
+  // Preselect plan from URL, e.g. buy.html?plan=Standard
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedPlan = urlParams.get('plan');
+  let preselected = null;
+  if (requestedPlan) {
+    preselected = Array.from(planCards).find(c => c.dataset.plan.toLowerCase() === requestedPlan.toLowerCase());
+  }
+  selectPlan(preselected || planCards[0]);
+
+  // Form submission
+  const form = document.getElementById('checkoutForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+  const checkoutFormCard = document.getElementById('checkoutFormCard');
+  const planPicker = document.getElementById('planPicker');
+  const confirmCard = document.getElementById('confirmCard');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    formStatus.classList.remove('show');
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Placing Order…';
+
+    try {
+      const res = await fetch('/api/order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (res.ok && data.ok) {
+        document.getElementById('confirmOrderNumber').textContent = data.orderNumber;
+        document.getElementById('confirmPlan').textContent = data.plan;
+        document.getElementById('confirmPrice').textContent = formatKsh(data.price);
+
+        planPicker.style.display = 'none';
+        checkoutFormCard.style.display = 'none';
+        confirmCard.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        formStatus.textContent = data.error || 'Something went wrong. Please check your details and try again.';
+        formStatus.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Place Order';
+      }
+    } catch (err) {
+      formStatus.textContent = 'Network error. Please check your connection and try again.';
+      formStatus.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-bag-shopping"></i> Place Order';
+    }
+  });
+</script>
+
+</body>
+</html>
