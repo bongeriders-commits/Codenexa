@@ -1,8 +1,8 @@
 {
-  "name": "codenexa-website",
+  "name": "codenexa-app",
   "version": "1.0.0",
   "private": true,
-  "description": "CodeNexa Solutions public website with Vercel serverless API functions backed by Firestore.",
+  "description": "CodeNexa Solutions standalone PWA app (independent codebase/deployment from the codenexa-website marketing site) with Vercel serverless API functions backed by Firestore.",
   "dependencies": {
     "firebase-admin": "^12.6.0"
   }
