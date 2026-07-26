@@ -159,18 +159,21 @@
   .feature-item p{font-size:12.5px;color:var(--gray-text);}
 
   /* ---------- Process ---------- */
-  .process-section{padding:70px 48px 60px;text-align:center;}
+  .process-section{padding:70px 0 60px;text-align:center;}
+  .process-section > .process-heading{padding:0 48px;}
   .process-track{
     display:flex;
     align-items:stretch;
     justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
+    flex-wrap:nowrap;
+    gap:0;
     margin-top:40px;
+    width:100%;
   }
   .process-step{
-    width:200px;min-height:240px;
-    border-radius:16px;
+    flex:1 1 0;
+    width:auto;min-height:340px;
+    border-radius:0;
     overflow:hidden;
     position:relative;
     background-size:cover;
@@ -180,7 +183,6 @@
     text-align:left;
     padding:20px 18px;
     color:#fff;
-    box-shadow:0 10px 28px rgba(10,26,60,0.18);
   }
   .process-step::before{
     content:'';
@@ -233,9 +235,10 @@
     .services-section{padding:50px 24px 30px;}
     .services-grid{grid-template-columns:repeat(2,1fr);}
     .feature-strip{margin:40px 20px 0;grid-template-columns:repeat(2,1fr);}
-    .process-section{padding:50px 20px 40px;}
-    .process-track{flex-direction:column;align-items:center;gap:18px;}
-    .process-step{width:100%;max-width:320px;}
+    .process-section{padding:50px 0 40px;}
+    .process-section > .process-heading{padding:0 20px;}
+    .process-track{flex-direction:column;align-items:stretch;gap:0;}
+    .process-step{width:100%;max-width:none;min-height:280px;}
     .cta-banner{flex-direction:column;text-align:center;}
   }
 
@@ -249,7 +252,9 @@
     .services-section{padding:36px 18px 20px;}
     .services-grid{grid-template-columns:1fr;gap:16px;}
     .feature-strip{margin:30px 18px 0;grid-template-columns:1fr;padding:26px 20px;gap:20px;}
-    .process-section{padding:36px 18px 30px;}
+    .process-section{padding:36px 0 30px;}
+    .process-section > .process-heading{padding:0 18px;}
+    .process-step{min-height:260px;}
     .cta-banner{padding:28px 18px;}
     .cta-left{flex-direction:column;text-align:center;gap:12px;}
     .cta-actions{flex-direction:column;width:100%;}
@@ -397,9 +402,11 @@
 </section>
 
 <section class="process-section">
-  <div class="eyebrow-center">OUR PROCESS</div>
-  <h2>Our Working <span style="color:var(--blue);">Process</span></h2>
-  <p style="color:var(--gray-text);font-size:15px;max-width:600px;margin:14px auto 0;">A simple, transparent and effective process to turn your ideas into reality.</p>
+  <div class="process-heading">
+    <div class="eyebrow-center">OUR PROCESS</div>
+    <h2>Our Working <span style="color:var(--blue);">Process</span></h2>
+    <p style="color:var(--gray-text);font-size:15px;max-width:600px;margin:14px auto 0;">A simple, transparent and effective process to turn your ideas into reality.</p>
+  </div>
 
   <div class="process-track">
     <div class="process-step" style="background-image:url('images/process-consultation.jpg');">
