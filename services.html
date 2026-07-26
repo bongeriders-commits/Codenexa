@@ -174,11 +174,13 @@
   }
   .process-icon{
     width:64px;height:64px;border-radius:50%;
-    background:var(--blue);color:#fff;
-    display:flex;align-items:center;justify-content:center;
-    font-size:22px;margin-bottom:10px;
+    overflow:hidden;
+    border:3px solid var(--blue);
+    box-shadow:0 4px 14px rgba(20,40,90,0.15);
+    margin-bottom:10px;
     position:relative;z-index:2;
   }
+  .process-icon img{width:100%;height:100%;object-fit:cover;display:block;}
   .process-num{
     background:var(--navy);color:#fff;
     font-size:11px;font-weight:700;
@@ -399,35 +401,35 @@
 
   <div class="process-track">
     <div class="process-step">
-      <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
+      <div class="process-icon"><img src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2&fit=crop" alt="Consultation"></div>
       <div class="process-num">01</div>
       <h4>Consultation</h4>
       <p>We understand your needs and goals.</p>
     </div>
     <div class="process-connector"></div>
     <div class="process-step">
-      <div class="process-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+      <div class="process-icon"><img src="https://images.pexels.com/photos/7369/pexels-photo-7369.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2&fit=crop" alt="Planning"></div>
       <div class="process-num">02</div>
       <h4>Planning</h4>
       <p>We analyze and plan the best solution.</p>
     </div>
     <div class="process-connector"></div>
     <div class="process-step">
-      <div class="process-icon"><i class="fa-solid fa-code"></i></div>
+      <div class="process-icon"><img src="https://images.pexels.com/photos/6424590/pexels-photo-6424590.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2&fit=crop" alt="Development"></div>
       <div class="process-num">03</div>
       <h4>Development</h4>
       <p>We build your solution with clean and efficient code.</p>
     </div>
     <div class="process-connector"></div>
     <div class="process-step">
-      <div class="process-icon"><i class="fa-solid fa-circle-check"></i></div>
+      <div class="process-icon"><img src="https://images.pexels.com/photos/8978610/pexels-photo-8978610.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2&fit=crop" alt="Testing"></div>
       <div class="process-num">04</div>
       <h4>Testing</h4>
       <p>We test thoroughly to ensure quality and performance.</p>
     </div>
     <div class="process-connector"></div>
     <div class="process-step">
-      <div class="process-icon"><i class="fa-solid fa-rocket"></i></div>
+      <div class="process-icon"><img src="https://images.pexels.com/photos/586112/pexels-photo-586112.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&dpr=2&fit=crop" alt="Deployment"></div>
       <div class="process-num">05</div>
       <h4>Deployment</h4>
       <p>We deliver and help your business go live successfully.</p>
